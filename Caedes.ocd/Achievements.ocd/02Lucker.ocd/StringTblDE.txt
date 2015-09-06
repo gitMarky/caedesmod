@@ -1,0 +1,2 @@
+Name=Lucker
+Description=Töte 5 Gegner durch kritische Treffer!

@@ -1,0 +1,2 @@
+Name=Potted plant
+Description=Decorates.

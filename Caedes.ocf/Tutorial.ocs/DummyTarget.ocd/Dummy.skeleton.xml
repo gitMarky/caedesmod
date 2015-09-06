@@ -1,0 +1,75 @@
+<skeleton>
+	<bones>
+		<bone id="3" name="skeleton_lowerbody">
+			<position x="-0.073032" y="-0.042951" z="-5.158886"/>
+			<rotation angle="2.084424">
+				<axis x="0.573950" y="-0.581996" z="-0.576075"/>
+			</rotation>
+		</bone>
+		<bone id="5" name="skeleton_body">
+			<position x="0.000000" y="4.200429" z="-0.000000"/>
+			<rotation angle="0.022599">
+				<axis x="-0.068993" y="0.006253" z="-0.997598"/>
+			</rotation>
+		</bone>
+		<bone id="6" name="skeleton_neck">
+			<position x="-0.000000" y="8.359315" z="-0.000000"/>
+			<rotation angle="1.741735">
+				<axis x="-0.009905" y="-0.999820" z="-0.016207"/>
+			</rotation>
+		</bone>
+		<bone id="1" name="skeleton_neck.002">
+			<position x="0.000000" y="6.037580" z="0.000000"/>
+			<rotation angle="3.084259">
+				<axis x="0.073709" y="-0.114699" z="-0.990662"/>
+			</rotation>
+		</bone>
+		<bone id="2" name="skeleton_neck.001">
+			<position x="0.000000" y="6.037580" z="0.000000"/>
+			<rotation angle="3.057552">
+				<axis x="-0.121017" y="-0.139126" z="0.982852"/>
+			</rotation>
+		</bone>
+		<bone id="0" name="skeleton_head">
+			<position x="0.000000" y="6.037580" z="0.000000"/>
+			<rotation angle="1.741636">
+				<axis x="0.002429" y="0.999421" z="0.033944"/>
+			</rotation>
+		</bone>
+		<bone id="8" name="skeleton_Rarm">
+			<position x="-0.000000" y="9.969946" z="0.000000"/>
+			<rotation angle="1.674852">
+				<axis x="0.976968" y="-0.142664" z="0.158684"/>
+			</rotation>
+		</bone>
+		<bone id="7" name="skeleton_Lhand">
+			<position x="-0.000000" y="10.037608" z="0.000001"/>
+			<rotation angle="1.800001">
+				<axis x="-0.964452" y="-0.169879" z="-0.202417"/>
+			</rotation>
+		</bone>
+		<bone id="9" name="skeleton_Larm">
+			<position x="-0.000000" y="10.037608" z="0.000001"/>
+			<rotation angle="1.814956">
+				<axis x="-0.964876" y="-0.167317" z="-0.202531"/>
+			</rotation>
+		</bone>
+		<bone id="4" name="skeleton_Rhand">
+			<position x="0.000000" y="5.912970" z="0.000001"/>
+			<rotation angle="0.313581">
+				<axis x="1.000000" y="-0.000001" z="-0.000000"/>
+			</rotation>
+		</bone>
+	</bones>
+	<bonehierarchy>
+		<boneparent bone="skeleton_body" parent="skeleton_lowerbody" />
+		<boneparent bone="skeleton_neck" parent="skeleton_body" />
+		<boneparent bone="skeleton_neck.002" parent="skeleton_neck" />
+		<boneparent bone="skeleton_neck.001" parent="skeleton_neck" />
+		<boneparent bone="skeleton_head" parent="skeleton_neck" />
+		<boneparent bone="skeleton_Rarm" parent="skeleton_neck.002" />
+		<boneparent bone="skeleton_Lhand" parent="skeleton_neck.001" />
+		<boneparent bone="skeleton_Larm" parent="skeleton_neck.001" />
+		<boneparent bone="skeleton_Rhand" parent="skeleton_Rarm" />
+	</bonehierarchy>
+</skeleton>

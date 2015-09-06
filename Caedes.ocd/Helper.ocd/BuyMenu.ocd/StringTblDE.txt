@@ -1,0 +1,8 @@
+Name=BuyMenu
+Description=It buys stuff ok
+PerkNextRound=Der Perk wird nächste Runde angewendet!
+
+PrimaryWeapons=Primärwaffen
+SecondaryWeapons=Sekundärwaffen
+Gadgets=Hilfsmittel
+Perks=Perks

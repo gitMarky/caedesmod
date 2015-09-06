@@ -1,0 +1,15 @@
+[DefCore]
+id=SignLine
+Version=4,10,0,0
+Category=C4D_StaticBack
+Width=60
+Height=60
+Offset=-30,-30
+Vertices=3
+VertexX=0,2,-2
+VertexY=1,-1,-1
+VertexFriction=20
+Value=1
+Mass=10
+Components=SignPool=1
+

@@ -1,0 +1,2 @@
+Name=Revenge
+Description=You deal more damage when you have very low HP.

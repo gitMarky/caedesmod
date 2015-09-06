@@ -1,0 +1,2 @@
+Name=Silencer
+Description=Schüsse hinterlassen keinen Schweif und es gibt kein Mündungsfeuer.

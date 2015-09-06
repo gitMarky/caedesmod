@@ -1,0 +1,15 @@
+[DefCore]
+id=GrenadeThrower_Grenade
+Version=4,10,0,0
+Category=C4D_Object
+Width=8
+Height=8
+Offset=-4,-4
+Vertices=1
+VertexX=0
+VertexY=0
+VertexFriction=20
+Mass=1
+Projectile=1
+Rotate=1
+

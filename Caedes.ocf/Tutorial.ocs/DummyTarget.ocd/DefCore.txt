@@ -1,0 +1,16 @@
+[DefCore]
+id=DummyTarget
+Version=4,10,0,0
+Category=C4D_Living
+Width=10
+Height=20
+Offset=-5,-10
+Vertices=7
+VertexX=0,0,-4, 4, 0, -2, 2
+VertexY=-8, 8, 0, 0, 1, -4, -4
+VertexFriction=100, 100, 100, 100, 100, 100, 100
+VertexCNAT=4, 8, 1, 2, 16, 1, 2
+Value=1
+Mass=10
+Components=DummyTarget=1
+ContactCalls=1

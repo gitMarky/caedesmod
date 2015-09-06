@@ -1,0 +1,14 @@
+[DefCore]
+id=BigBomb
+Version=4,10,0,0
+Category=C4D_Vehicle
+Width=20
+Height=20
+Offset=-10,-10
+Vertices=4
+VertexX=0,5,-5, 0
+VertexY=9,0,0, -9
+VertexFriction=20
+Value=1
+Rotate=1
+

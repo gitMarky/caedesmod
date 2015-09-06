@@ -1,0 +1,12 @@
+[DefCore]
+id=PottedPlant
+Version=4,10,0,0
+Category=C4D_Vehicle
+Width=15
+Height=25
+Offset=-7,-11
+Vertices=3
+VertexX=0,-5,5
+VertexY=13, 1 ,1
+VertexFriction=200, 200, 200
+

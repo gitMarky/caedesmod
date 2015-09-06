@@ -1,0 +1,17 @@
+[DefCore]
+id=Helmet_Part
+Version=4,10,0,0
+Category=C4D_Vehicle
+Width=10
+Height=10
+Offset=-5,-5
+Vertices=3
+VertexX=0,3,-3
+VertexY=3,-3,-3
+VertexFriction=20
+Value=1
+Mass=10
+Components=Helmet_Part=1
+Projectile=1
+Rotate=1
+

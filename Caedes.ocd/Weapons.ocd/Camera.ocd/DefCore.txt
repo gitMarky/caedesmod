@@ -1,0 +1,14 @@
+[DefCore]
+id=Camera
+Version=4,10,0,0
+Category=C4D_Vehicle
+Width=10
+Height=10
+Offset=-5,-5
+Vertices=4
+VertexX=0,0,-5,5
+VertexY=-5,5,0,0
+VertexFriction=20
+Value=20
+Mass=10
+

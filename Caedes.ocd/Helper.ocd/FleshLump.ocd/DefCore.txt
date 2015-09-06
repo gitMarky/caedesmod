@@ -1,0 +1,14 @@
+[DefCore]
+id=FLSH
+Category=2
+Width=8
+Height=10
+Offset=-4,-5
+Mass=12
+Components=FLSH=1;
+Picture=0,0,10,10
+Vertices=2
+VertexX=-3,3
+VertexY=0,0
+VertexFriction=20,20
+ 

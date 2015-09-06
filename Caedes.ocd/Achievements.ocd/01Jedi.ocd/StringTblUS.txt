@@ -1,0 +1,2 @@
+Name=Jedi
+Description=Kill 5 enemies with the lasersword! 

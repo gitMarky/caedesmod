@@ -1,0 +1,2 @@
+Name=C-C-Combo!
+Description=Kill 3 enemies with the combo of the shock rifle!

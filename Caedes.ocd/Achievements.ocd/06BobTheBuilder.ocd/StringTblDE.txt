@@ -1,0 +1,2 @@
+Name=Bob der Baumeister
+Description=Baue 10 Gebäude!

@@ -1,0 +1,3 @@
+Name=Grenade Thrower
+Description=Shoots rebouncing grenades.|Ammo: 1/5
+UsageHelp=Aim and shoot with [Use].

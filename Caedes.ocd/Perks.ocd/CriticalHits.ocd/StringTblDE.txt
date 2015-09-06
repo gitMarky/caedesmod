@@ -1,0 +1,2 @@
+Name=CriticalHits
+Description=Your shots have a chance to hit stronger.

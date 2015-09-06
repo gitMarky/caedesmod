@@ -1,0 +1,3 @@
+Name=Zerstörung
+Description=Ein Team versucht eine Bombe zu platzieren. Das andere Team versucht dies zu verhindern.
+

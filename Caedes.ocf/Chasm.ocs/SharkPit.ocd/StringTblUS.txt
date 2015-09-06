@@ -1,0 +1,2 @@
+Name=Shark Pit
+Description=When this rule is activated, every Clonk touching the bottom of the map will be devoured by a Shark

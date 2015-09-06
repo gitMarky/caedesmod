@@ -1,0 +1,4 @@
+Name=RoundHelper
+Description=Helps with stuff
+NewRound=New round! %02d:%02d time remaining!
+NewRoundShort=New round!

@@ -1,0 +1,6 @@
+GotAchievement=%s hat das Achievement <c ff0000>%s</c> erhalten!
+Draw=Das Spiel war unentschieden!
+TeamWon=Team %d [%s] hat das Spiel gewonnen!
+teamdamage=teamdamage
+RoundStats=Diese Runde:
+TimeLeft=Noch zu Spielen: %02d:%02d

@@ -1,0 +1,3 @@
+Name=SMG
+Description=High fire rate, low accuracy.|Ammo: 25/100
+UsageHelp=Aim and shoot with [Use]. The musket needs lead shots as ammunition.

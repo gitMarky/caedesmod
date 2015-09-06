@@ -1,0 +1,2 @@
+Name=Wrecker
+Description=Destroy 3 enemy buildings in one life!

@@ -1,0 +1,3 @@
+[Particle]
+Name=LeafDetailed
+Face=0,0,48,48,-24,-24

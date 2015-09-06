@@ -1,0 +1,4 @@
+Name=BigBomb
+Description=A massive bomb.
+Defend=Defend the bomb!
+Defuse=Defuse the bomb!

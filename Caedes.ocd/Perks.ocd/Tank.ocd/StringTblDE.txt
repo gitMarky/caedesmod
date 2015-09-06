@@ -1,0 +1,2 @@
+Name=Tank
+Description=Du hast mehr HP.

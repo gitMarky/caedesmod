@@ -1,0 +1,3 @@
+Name=RocketLauncher
+Description=Boom!
+UsageHelp=Zielen und Schiessen!

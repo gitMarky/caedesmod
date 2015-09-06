@@ -1,0 +1,2 @@
+Name=Fuse
+Description=Fuses a pack of C4.

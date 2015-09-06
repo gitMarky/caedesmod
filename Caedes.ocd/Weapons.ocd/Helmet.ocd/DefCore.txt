@@ -1,0 +1,13 @@
+[DefCore]
+id=Helmet
+Version=4,10,0,0
+Category=C4D_Object
+Width=10
+Height=10
+Offset=-5,-5
+Vertices=3
+VertexX=0,2,-2
+VertexY=1,-1,-1
+VertexFriction=20
+Value=25
+Mass=10

@@ -1,0 +1,2 @@
+Name=Camera
+Description=Makes close enemies visible.

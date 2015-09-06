@@ -1,0 +1,2 @@
+Name=Hai Grube
+Description=Wenn diese Spielregel aktiviert ist, werden alle Clonks die den Boden der Karte berühren durch einen Hai getötet

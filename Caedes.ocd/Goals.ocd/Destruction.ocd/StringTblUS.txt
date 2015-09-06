@@ -1,0 +1,2 @@
+Name=Destruction
+Description=One team tries to plant a bomb. The other team has to prevent that.

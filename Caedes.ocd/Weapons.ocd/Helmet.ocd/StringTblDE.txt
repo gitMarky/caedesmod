@@ -1,0 +1,2 @@
+Name=Helm
+Description=Verhindert einen tödlichen Schuss.

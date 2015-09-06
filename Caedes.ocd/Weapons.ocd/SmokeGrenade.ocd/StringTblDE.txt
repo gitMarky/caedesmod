@@ -1,0 +1,2 @@
+Name=Rauchbombe
+Description=Undurchsichtige Barriere.

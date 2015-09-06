@@ -1,0 +1,2 @@
+Name=Supporter
+Description=Bekomme 3 Unterstützerkills mit der LinkGun!

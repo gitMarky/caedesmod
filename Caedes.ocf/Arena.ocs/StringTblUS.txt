@@ -1,0 +1,1 @@
+RestartDesc=Play this scenario again!

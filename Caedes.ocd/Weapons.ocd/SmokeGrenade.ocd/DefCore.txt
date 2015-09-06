@@ -1,0 +1,15 @@
+[DefCore]
+id=SmokeGrenade
+Version=4,10,0,0
+Category=C4D_Object
+Width=5
+Height=8
+Offset=-2,-4
+Vertices=3
+VertexX=0,1,-1
+VertexY=2,-1,-2
+VertexFriction=60, 60, 60
+Value=20
+Mass=5
+Picture=6,0,64,64
+Rotate=1

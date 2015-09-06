@@ -1,0 +1,2 @@
+Name=Bandoleer
+Description=Verbessert das Magazin und die Nachladezeit.

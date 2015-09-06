@@ -1,0 +1,2 @@
+Name=Waffen Nachladen
+Description=Einmal nachladen kostet 10.

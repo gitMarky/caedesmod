@@ -1,0 +1,4 @@
+Name=RoundHelper
+Description=Helps with stuff
+NewRound=Neue Runde! Noch %02d:%02d Zeit übrig!
+NewRoundShort=Neue Runde!

@@ -1,0 +1,2 @@
+Name=Weste
+Description=Verringert den Schaden jedes einzelnen Treffers etwas. Dadurch besonders gegen Schrotflinte etc. geeignet.

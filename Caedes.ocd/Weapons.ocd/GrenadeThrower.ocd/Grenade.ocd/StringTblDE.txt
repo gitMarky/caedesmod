@@ -1,0 +1,2 @@
+Name=Grenade
+Description=Hits stuff and explodes.

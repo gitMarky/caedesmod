@@ -1,0 +1,2 @@
+Name=Proxy
+Description=Bekomme 5 Kills durch ein einziges Turret!

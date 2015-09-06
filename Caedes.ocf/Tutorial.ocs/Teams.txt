@@ -1,0 +1,12 @@
+[Teams]
+FreeForAll=false
+AllowTeamSwitch=false
+AllowHostilityChange=false
+TeamColors=true
+
+	[Team]
+	id=1
+	Name=Guerillas
+	Color=65280
+
+

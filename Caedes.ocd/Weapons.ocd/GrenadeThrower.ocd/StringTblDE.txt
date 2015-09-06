@@ -1,0 +1,3 @@
+Name=Granatenwerfer
+Description=Schieﬂt abprallende Granaten.|Ammo: 1/5
+UsageHelp=Ziele und schieﬂe mit [Benutzen].

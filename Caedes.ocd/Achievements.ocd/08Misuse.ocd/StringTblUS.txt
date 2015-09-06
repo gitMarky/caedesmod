@@ -1,0 +1,2 @@
+Name=Misuse
+Description=Kill 3 enemies standing in front of you with a sniper!

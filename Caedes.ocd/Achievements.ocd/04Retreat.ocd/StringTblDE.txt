@@ -1,0 +1,2 @@
+Name=Rückzug
+Description=Heile in einem Leben 500 Punkte!

@@ -1,0 +1,2 @@
+Name=Supporter
+Description=Get 3 assistance kills with the LinkGun!

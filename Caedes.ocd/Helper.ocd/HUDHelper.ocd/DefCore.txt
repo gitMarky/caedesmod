@@ -1,0 +1,11 @@
+[DefCore]
+id=Caedes_HUDHelper
+Version=4,10,0,0
+Category=C4D_StaticBack | C4D_Parallax | C4D_MouseIgnore | C4D_IgnoreFoW
+Width=4
+Height=4
+Offset=-8,-8
+Vertices=1
+VertexX=0
+VertexFriction=20
+

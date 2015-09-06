@@ -1,0 +1,46 @@
+# Automatically generated texture map
+# Contains material-texture-combinations added at runtime
+# Import materials from global file as well
+OverloadMaterials
+# Import textures from global file as well
+OverloadTextures
+
+1=Tunnel-tunnel
+2=Tunnel-tunnel
+3=Tunnel-brickback
+4=BrickSoft-brick1
+5=DuroLava-lava_red
+6=Water-water1-water2-water3-water1-water3-water2
+7=Ore-ore
+8=Acid-acid
+9=Lava-lava_red
+10=DuroLava-lava_red
+11=Water-water
+12=SandDry-sand_rough
+13=Acid-acid
+14=Lava-lava_red
+15=Earth-earth_dry
+16=Earth-earth_rough
+17=Earth-earth_topsoil
+18=Earth-earth_midsoil
+19=Ashes-ashes
+20=Vehicle-none
+21=Earth-earth
+22=Granite-granite
+23=Granite-rock
+24=Gold-gold
+25=Rock-rock
+26=Rock-rock_cracked
+27=Sulphur-sulphur
+28=Coal-coal
+29=Sand-sand_rough
+36=Ice-ice2
+37=Ice-ice3
+38=Snow-snow1
+39=Brick-brick1
+75=BackWall-Concrete1Back
+76=BackWall-Concrete2Back
+80=BackWall-cBrick1Back
+100=Wall-Concrete1
+101=Wall-Concrete2
+105=Wall-cBrick1

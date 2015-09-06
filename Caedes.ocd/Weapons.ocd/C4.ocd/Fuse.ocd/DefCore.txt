@@ -1,0 +1,15 @@
+[DefCore]
+id=C4_Fuse
+Version=4,10,0,0
+Category=C4D_Object
+Width=3
+Height=7
+Offset=-2,-4
+Vertices=3
+VertexX=0,2,-2
+VertexY=3,-1,-1
+VertexFriction=20
+Value=1
+Mass=2
+Components=C4_Fuse=1
+

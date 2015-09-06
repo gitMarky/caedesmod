@@ -1,0 +1,7 @@
+[DefCore]
+id=Symbol_InfoFailedToPlant
+Version=5,2,0,1
+Category=C4D_StaticBack | C4D_IgnoreFoW | C4D_Foreground | C4D_Parallax | C4D_MouseSelect
+Width=300
+Height=300
+Offset=-150,-150

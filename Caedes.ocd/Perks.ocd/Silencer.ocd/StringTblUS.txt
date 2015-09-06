@@ -1,0 +1,2 @@
+Name=Silencer
+Description=Your shots do not leave a trail and have no muzzle flash.

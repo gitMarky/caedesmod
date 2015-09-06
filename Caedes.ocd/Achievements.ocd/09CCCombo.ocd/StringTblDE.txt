@@ -1,0 +1,2 @@
+Name=C-C-Combo!
+Description=Töte drei Gegner durch einen Kombo der Schockrifle!

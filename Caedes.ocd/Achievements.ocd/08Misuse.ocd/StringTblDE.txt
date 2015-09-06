@@ -1,0 +1,2 @@
+Name=Missbrauch
+Description=Töte 3 Gegner im Nahkampf mit einer Sniper!

@@ -1,0 +1,6 @@
+[DefCore]
+id=ChatBomb
+Version=5,2,0,1
+Category=C4D_StaticBack
+Offset=-56,0
+Picture=0,0,150,50

@@ -1,0 +1,45 @@
+The sounds in this folder have been created by different authors.
+Sounds that are not listed here have been created specifically for the Caedes project
+and are thus subject to the same license as the whole Caedes project.
+
+All other sounds listed here are subject to their respective license.
+Most (if not all) sounds from third-party authors are remixed versions (f.e. normalized / noise reduced / cut).
+
+
+CC0 ( http://creativecommons.org/publicdomain/zero/1.0/ )
+=========================================================
+BombExplosion by tommccann - http://www.freesound.org/people/tommccann/sounds/235968/
+GrenadeHit1 by adcbicycle - http://www.freesound.org/people/adcbicycle/sounds/13979/
+GrenadeHit2 by adcbicycle - http://www.freesound.org/people/adcbicycle/sounds/13977/
+Inhale1 by carroll27 - http://www.freesound.org/people/carroll27/sounds/151919/
+Inhale2 by otherthings - http://www.freesound.org/people/otherthings/sounds/65621/
+RocketFlight by qubodup - http://www.freesound.org/people/qubodup/sounds/171106/
+RocketLaunch by Ramston - http://www.freesound.org/people/Ramston/sounds/262436/
+ShortReload1 & LongReload1 by davdud101 - http://www.freesound.org/people/davdud101/sounds/145475/
+Silenced2 by awesomemann1234 - http://www.freesound.org/people/awesomemann1234/sounds/100465/
+SniperShot by martian - http://www.freesound.org/people/martian/sounds/182271/
+
+CC-BY ( http://creativecommons.org/licenses/by/3.0/ )
+=====================================================
+BulletDrop1 & 2 by NoiseCollector - http://www.freesound.org/people/NoiseCollector/sounds/41604/
+FleshHit1 & 2 by duckduckpony - http://www.freesound.org/people/duckduckpony/sounds/204026/
+ShortReload by Fr3yr - http://www.freesound.org/people/Fr3yr/sounds/100804/
+Silenced1 by twisterman - http://www.freesound.org/people/twisterman/sounds/163583/
+SniperAim by bennychico11 - http://www.freesound.org/people/bennychico11/sounds/43994/
+
+CC-BY-NC ( http://creativecommons.org/licenses/by-nc/3.0/ )
+===========================================================
+RocketBlast by ryansnook - http://www.freesound.org/people/ryansnook/sounds/110115/
+SMG1 & 2 by Robinhood76 - http://www.freesound.org/people/Robinhood76/sounds/65752/
+
+CC-Sampling+ ( http://creativecommons.org/licenses/sampling+/1.0/ )
+===================================================================
+DryFire1 & 2 & 3 by sentryx86 - http://www.freesound.org/people/sentryx86/sounds/52202/
+LongReload by LAGtheNoggin - http://www.freesound.org/people/LAGtheNoggin/sounds/15545/
+Splatter by Rock Savage - http://www.freesound.org/people/Rock%20Savage/sounds/81042/
+
+Mixes
+=====
+Crit1:
+	CC0 - kevinkace - http://www.freesound.org/people/kevinkace/sounds/66780/
+	CC0 - soneproject - http://www.freesound.org/people/soneproject/sounds/244355/

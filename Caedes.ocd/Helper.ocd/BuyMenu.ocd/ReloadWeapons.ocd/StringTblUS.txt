@@ -1,0 +1,2 @@
+Name=Reload Wepaons
+Description=Every full reload costs 10.

@@ -1,0 +1,3 @@
+Name=Raketenwerfer
+Description=Boom!
+UsageHelp=Aim and launch!

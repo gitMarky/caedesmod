@@ -1,0 +1,2 @@
+Name=Lucker
+Description=Kill 5 enemies with critical hits!

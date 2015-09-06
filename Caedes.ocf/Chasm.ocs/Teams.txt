@@ -1,0 +1,14 @@
+[Teams]
+TeamColors=true
+
+	[Team]
+	id=1
+	Name=Guerillas
+	Color=65280
+
+	[Team]
+	id=2
+	Name=Counter
+	Color=16711680
+
+

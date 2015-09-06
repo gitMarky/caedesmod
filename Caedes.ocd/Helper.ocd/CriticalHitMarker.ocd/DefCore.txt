@@ -1,0 +1,11 @@
+[DefCore]
+id=Critmarker
+Version=4,9,5
+Category=25165828
+Width=10
+Height=20
+Offset=-5,-10
+
+
+[Physical]
+Float=100

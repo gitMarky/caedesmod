@@ -1,0 +1,2 @@
+Name=Accuracy
+Description=Increases the accuracy and range when shooting.

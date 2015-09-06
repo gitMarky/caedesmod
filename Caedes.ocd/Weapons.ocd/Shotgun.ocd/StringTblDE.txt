@@ -1,0 +1,3 @@
+Name=Schrotflinte
+Description=Niedrige Schussrate und Reichweite, hohe Streuung.|Ammo: 1/10
+UsageHelp=Ziele und schieße mit [Benutzen]. Die Muskete benötigt Bleikugeln als Munition.

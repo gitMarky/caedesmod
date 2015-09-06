@@ -1,0 +1,2 @@
+Name=BombZone
+Description=Plant bomb here.

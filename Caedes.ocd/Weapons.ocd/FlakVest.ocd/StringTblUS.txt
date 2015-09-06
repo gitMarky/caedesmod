@@ -1,0 +1,2 @@
+Name=Vest
+Description=Lowers the damage of every shot. Thus especially suited against the shotgun etc.

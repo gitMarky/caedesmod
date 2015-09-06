@@ -1,0 +1,2 @@
+Name=Abbruchunternehmer
+Description=Zerstöre 3 gegnerische Gebäude in einem Leben!

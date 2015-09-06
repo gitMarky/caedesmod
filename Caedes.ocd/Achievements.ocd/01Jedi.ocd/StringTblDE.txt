@@ -1,0 +1,2 @@
+Name=Jedi
+Description=Töte 5 Gegner mit dem Laserschwert!

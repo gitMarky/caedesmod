@@ -1,0 +1,2 @@
+Name=Retreat
+Description=Heal 500 life points in one life!

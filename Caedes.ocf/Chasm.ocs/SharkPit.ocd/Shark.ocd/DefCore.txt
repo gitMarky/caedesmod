@@ -1,0 +1,11 @@
+[DefCore]
+id=SharkPit_Shark
+Version=5,2,0,1
+Category=C4D_Vehicle
+Width=60
+Height=110
+Offset=-30,-55
+Vertices=9
+Components=Wood=4
+Mass=150
+Rotate=1

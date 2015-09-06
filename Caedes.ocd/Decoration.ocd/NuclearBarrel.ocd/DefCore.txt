@@ -1,0 +1,12 @@
+[DefCore]
+id=NuclearBarrel
+Version=4,10,0,0
+Category=C4D_Vehicle
+Width=10
+Height=15
+Offset=-5,-7
+Vertices=3
+VertexX=0,-3,3
+VertexY=6, -1 ,-1
+VertexFriction=200, 200, 200
+

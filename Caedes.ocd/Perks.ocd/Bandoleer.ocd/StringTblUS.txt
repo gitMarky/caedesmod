@@ -1,0 +1,2 @@
+Name=Bandoleer
+Description=Improves the magazine and the reload time.
