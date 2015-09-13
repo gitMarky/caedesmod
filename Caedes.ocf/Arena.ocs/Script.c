@@ -13,12 +13,13 @@ protected func Initialize()
 	CreateObject(Rule_KillLogs);
 	CreateObject(Goal_Destruction);
 	
-	CreateObject(ExplosiveBarrel, LandscapeWidth()/2 + 50, 263, NO_OWNER)->CreateRespawner();
-	CreateObject(ExplosiveBarrel, LandscapeWidth()/2 - 50, 263, NO_OWNER)->CreateRespawner();
-	
-	CreateObject(PottedPlant, 383, 123 - 11)->CreateRespawner();
-	CreateObject(PottedPlant, 419, 123 - 11)->CreateRespawner({w = -1000, h = 1000});
-	
+	// spawn points	
+	CreateSpawnPoint(LandscapeWidth()/2 + 50, 263)->SetRespawnTimer(SPAWNPOINT_Timer_Infinite)->SpawnDeco(ExplosiveBarrel);
+	CreateSpawnPoint(LandscapeWidth()/2 + 50, 263)->SetRespawnTimer(SPAWNPOINT_Timer_Infinite)->SpawnDeco(ExplosiveBarrel);
+
+	CreateSpawnPoint(383, 123 - 11)->SetRespawnTimer(SPAWNPOINT_Timer_Infinite)->SpawnDeco(PottedPlant);
+	CreateSpawnPoint(419, 123 - 11)->SetRespawnTimer(SPAWNPOINT_Timer_Infinite)->SpawnDeco(PottedPlant, {width = -1000, height = 1000});
+
 	PlaceBombZone(LandscapeWidth()/2, 115);
 	PlaceBombZone(LandscapeWidth()/2, 315 + 8);
 	
@@ -35,6 +36,7 @@ protected func Initialize()
 		flag->SetFlagRadius(60);
 		flag.Team = t;
 	}
+	
 	return;
 }
 

@@ -4,7 +4,9 @@ Version=5,2,0,1
 
 [Definitions]
 Definition1=Objects.ocd
-Definition2=caedesmod\Caedes.ocd
+Definition2=LibraryArenaGames.ocd
+Definition3=caedesmod\Caedes.ocd
+
 
 [Game]
 Goals=MELE

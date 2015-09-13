@@ -92,7 +92,7 @@ global func FxTutorialCheckTimer(target, effect, time)
 		if(data.end) data->end();
 		Next(nil);
 		++ current_step;
-		RoundHelper->TeamWonRound(1);
+		GetRoundHelper()->TeamWonRound(1);
 		return 1;
 	}
 	

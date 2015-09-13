@@ -1,7 +1,0 @@
-[DefCore]
-id=DecoRespawner
-Version=4,10,0,0
-Category=C4D_StaticBack
-Width=8
-Height=8
-Offset=-4,-4

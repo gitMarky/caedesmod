@@ -45,8 +45,11 @@ global func InitCaedes()
 	AddEffect("GlobalVisibilityCheck", 0, 1, 15, 0);
 	if(!ObjectCount(Find_ID(CallbackRule)))
 		CreateObject(CallbackRule);
-	AddEffect("SchedNewRound", 0, 1, 60);
-	
+
+
+	CreateObject(Environment_RoundManager);
+	CreateObject(RoundHelper);
+
 	StopGameCounter(true); // create game counter, stopped
 	
 	Caedes_ViewPoints = [];
@@ -119,12 +122,6 @@ func FxRemoveFromViewPointsStop(target, effect, reason, temp)
 	{
 		RemoveArrayIndex(Caedes_ViewPoints, i, true);
 	}
-}
-
-global func FxSchedNewRoundTimer()
-{
-	RoundHelper->NewRound();
-	return -1;
 }
 
 global func FxGlobalVisibilityCheckTimer(t, effect, time)
@@ -214,11 +211,11 @@ global func CaedesBombExploded(bool exploded)
 	CaedesSetBombPlanted(false);
 	
 	if(exploded)
-		RoundHelper->TeamWonRound(Caedes_BombingTeam);
+		GetRoundHelper()->TeamWonRound(Caedes_BombingTeam);
 	else 
 	{
 		CreateObject(Symbol_BombDefused, 250 - GetX(), 300 - GetY(), NO_OWNER);
-		RoundHelper->TeamWonRound(3 - Caedes_BombingTeam);
+		GetRoundHelper()->TeamWonRound(3 - Caedes_BombingTeam);
 	}
 	
 }
@@ -234,7 +231,7 @@ global func CaedesTimeRanOut()
 		else Symbol_InfoFailedToPlant->ShowFor(plr);
 	}
 	
-	RoundHelper->TeamWonRound(team);
+	GetRoundHelper()->TeamWonRound(team);
 }
 
 global func FxCaedesGameCounterStart(_, effect, temp)
