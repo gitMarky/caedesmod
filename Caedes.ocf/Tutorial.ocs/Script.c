@@ -7,6 +7,8 @@ static goal;
 static PLAYER;
 static purchaseable;
 
+static tutorial_paused;
+
 static const STD_TIME = 90;
 
 global func GetMaximumGameTime(){return 0;}
@@ -55,6 +57,8 @@ protected func Initialize()
 	flag->SetFlagRadius(60);
 	flag.Team = 1;
 	
+	tutorial_paused = false;
+	
 	AddEffect("TutorialCheck", nil, 1, 35, nil);
 	
 	return;
@@ -84,7 +88,7 @@ global func GetPlayerRespawnPosition(plr)
 global func FxTutorialCheckTimer(target, effect, time)
 {
 	if(GetCursor(PLAYER)->Contained()) return 1;
-	if(GetRoundHelper()->IsRoundCountdown()) return 1;
+	if(tutorial_paused) return 1;
 
 	var data = round_data[current_step];
 	if(data->check())
@@ -92,7 +96,8 @@ global func FxTutorialCheckTimer(target, effect, time)
 		if(data.end) data->end();
 		Next(nil);
 		++ current_step;
-		GetRoundHelper()->TeamWonRound(1);
+		tutorial_paused = true;
+		if (goal) RoundManager()->RemoveRoundEndBlocker(goal);
 		return 1;
 	}
 	
@@ -120,8 +125,17 @@ global func Next(what, when)
 	round_data[current_step].next = what;
 }
 
-func OnNewRound()
+
+func OnRoundStart(int round)
 {
+	if (goal)
+	{
+		RoundManager()->RegisterRoundEndBlocker(goal);
+		RoundManager()->RemoveRoundEndBlocker(GetRoundHelper());
+	}
+
+   //former func OnNewRound()
+
 	purchaseable = [];
 	
 	SetWealth(PLAYER, 0);
@@ -135,6 +149,8 @@ func OnNewRound()
 	
 	goal.Description = data.txt;
 	
+	tutorial_paused = false;
+	
 	if(data.start) data->start();
 	
 	//if(!data.already)
@@ -142,7 +158,6 @@ func OnNewRound()
 		data.already = true;
 		if(data.init) data->init();
 	}
-
 }
 
 func QueryRejectPurchase(player, item)
