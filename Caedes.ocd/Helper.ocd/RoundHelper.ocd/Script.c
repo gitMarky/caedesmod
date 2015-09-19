@@ -69,33 +69,7 @@ public func OnRoundStart(int counter)
     if (DoTeamEliminationCheck()) return;
 
 	// some announcing
-	if(GetMaximumRoundTime())
-	{
-		var t = GetMaximumRoundTime() - GetGameCounter();
-		if(t < 0) t = 0;
-
-
-		if((t < GetMaximumRoundTime() / 2) && !Caedes_Halftime_announced)
-		{
-			Caedes_Halftime_announced = true;
-			ExecuteHalftime();
-		}
-
-		if(t == 0)
-		{
-			// already announced?
-			if(Caedes_LastRound_announced)
-			{
-				EndGame();
-				return true;
-			}
-
-			Caedes_LastRound_announced = true;
-			AnnounceLastRound();
-		}
-		CustomMessage(Format("$NewRound$", t / 60, t % 60), nil, nil, 0, 0, 0, 0, 0, 0);
-	}
-	else CustomMessage("$NewRoundShort$");
+	if (!AnnounceNewRound()) return;
 
 	// respawn players
 	for(var i = 0; i < GetPlayerCount(); ++i)
@@ -472,4 +446,38 @@ private func DoTeamEliminationCheck()
 	}
 	// end elim check
     return false;
+}
+
+
+private func AnnounceNewRound()
+{
+	if(GetMaximumRoundTime())
+	{
+		var t = GetMaximumRoundTime() - GetGameCounter();
+		if(t < 0) t = 0;
+
+
+		if((t < GetMaximumRoundTime() / 2) && !Caedes_Halftime_announced)
+		{
+			Caedes_Halftime_announced = true;
+			ExecuteHalftime();
+		}
+
+		if(t == 0)
+		{
+			// already announced?
+			if(Caedes_LastRound_announced)
+			{
+				EndGame();
+				return false;
+			}
+
+			Caedes_LastRound_announced = true;
+			AnnounceLastRound();
+		}
+		CustomMessage(Format("$NewRound$", t / 60, t % 60), nil, nil, 0, 0, 0, 0, 0, 0);
+	}
+	else CustomMessage("$NewRoundShort$");
+	
+	return true;
 }
