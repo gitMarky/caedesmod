@@ -90,7 +90,6 @@ public func OnRoundStart(int counter)
 
 public func TriggerRoundEnd()
 {
-	Log("[%d] + 360 RoundHelper: stop the round", FrameCounter());
 	RoundManager()->RemoveRoundEndBlocker(this);
 }
 
