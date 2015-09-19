@@ -75,11 +75,7 @@ public func OnRoundStart(int counter)
 	RespawnPlayers();
 
 	// remove weapons
-	for(var obj in FindObjects(Find_NoContainer()))
-	{
-		if(obj->~IsWeapon() || obj->GetDefCoreVal("Projectile", "DefCore") == 1)
-			obj->RemoveObject();
-	}
+    RemoveWeapons();
 
 	// if bombing goal, place bomb
 	if(ObjectCount(Find_ID(Goal_Destruction)))
@@ -484,5 +480,14 @@ private func RespawnPlayers()
 	
 		var m = c->~GetMenu();
 		if(m) m->~Close();
+	}
+}
+
+private func RemoveWeapons()
+{
+	for(var obj in FindObjects(Find_NoContainer()))
+	{
+		if(obj->~IsWeapon() || obj->GetDefCoreVal("Projectile", "DefCore") == 1)
+			obj->RemoveObject();
 	}
 }
