@@ -55,9 +55,6 @@ public func OnRoundStart(int counter)
 {
 	Log("[%d] RoundHelper: Round %d starts", FrameCounter(), counter);
 	RoundManager()->RegisterRoundEndBlocker(this);
-	ScheduleCall(this, "TriggerRoundEnd", 36*60*2, 0); //TODO a dummy 2 minute round
-
-	// stuff from the former NewRound()-function:
 
 	// anything left from last round?
 	ClearRoundEffects();
@@ -252,35 +249,45 @@ protected func FxCheckNextRoundEffect(string new_name, object target, proplist e
 protected func FxCheckNextRoundTimer(target, effect, time)
 {
 	var teams = [];
+	// count all players that are not respawning
 	for(var i = 0; i < GetPlayerCount(); ++i)
 	{
-		var p = GetPlayerByIndex(i);
-		var c = GetCrew(p);
-		var t = GetPlayerTeam(p);
-		if(!t) continue;
-		if(!c) continue;
+		var player = GetPlayerByIndex(i);
+		var crew = GetCrew(player);
+		var team_index = GetPlayerTeam(player);
+		if(!team_index) continue;
+		if(!crew) continue;
 		
-		if(!c->Contained())
-			teams[t] = t;
+		if(!crew->Contained())
+			teams[team_index] = team_index;
 	}
-	
+
+    // as long as both teams are alive do not start a new round
 	var cnt = 0;
 	var found_team = nil;
-	for(var t in teams)
-		if(t) {cnt += 1; found_team = t;}
+	for(var team in teams)
+		if(team) {cnt += 1; found_team = team;}
 	if(cnt >= 2) return 1;
+	// in single player, if he has a team, prevent a new round from starting
 	if((GetPlayerCount() <= 1) && found_team) return 1;
-	if(GameCall("QueryRejectNewRound")) return 1;
 	
-	// ask goals
+	// if anyone else does not want a new round to start, then prevent that
+	// TODO: these objects should register themselves to the round manager instead
+	if(GameCall("QueryRejectNewRound")) return 1;
+
+	// ask goals if they prevent the start of a new round
+	// TODO: these objects should register themselves to the round manager instead
 	for(var obj in FindObjects(Find_Category(C4D_Goal)))
 	{
 		if(obj->~QueryRejectNewRound(found_team)) return 1;
 	}
 	
+	// let the surviving team win
 	if(found_team != nil)
-		GetRoundHelper()->TeamWonRound(found_team);
-	else DoRoundCountdown();
+		TeamWonRound(found_team);
+
+	// actually start the new round.
+    RoundManager()->RemoveRoundEndBlocker(this);
 	
 	return -1;
 }
