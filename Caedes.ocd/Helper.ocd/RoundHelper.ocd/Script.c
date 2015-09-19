@@ -41,8 +41,8 @@ public func OnRoundReset(int counter)
 {
 	Log("[%d] RoundHelper preparing for round %d", FrameCounter(), counter);
 	RoundManager()->RegisterRoundStartBlocker(this);
-	
-	if (!GetEffect("TickNewRound", this)) AddEffect("TickNewRound", this, 1, 5, this);
+
+	DoRoundCountdown();
 }
 
 public func TriggerRoundStart()
@@ -87,7 +87,7 @@ public func OnRoundStart(int counter)
 
 	GameCall("OnNewRound"); // TODO: replace this call with the one from Round Manager
 
-	AddEffect("CheckNextRound", nil, 1, 30, nil);
+	AddEffect("CheckNextRound", this, 1, 30, this);
 	AddEffect("DelayGoSound", nil, 1, Caedes_ShoppingTime, nil, RoundHelper);
 }
 
@@ -209,14 +209,14 @@ global func GetTeamSpawnPosition(){return _inherited(...);}
 
 func ClearRoundEffects()
 {
-	RemoveEffect("CheckNextRound", nil);
+	RemoveEffect("CheckNextRound", this);
 	RemoveAll(Find_ID(HUD_CaedesTimer));
 }
 
 func TeamWonRound(int team)
 {
 	// already over
-	if(GetEffect("TickNewRound", this)) return 1;
+	if (IsRoundCountdown()) return;
 
 	ClearRoundEffects();
 
@@ -242,17 +242,14 @@ func TeamWonRound(int team)
 	Scoreboard->SetData(CdsTeamID(team), "score", ++Caedes_team_score[team]);
 
 	Z4PlayersWonRound(players_winlose[0], players_winlose[1]);
-
-// TODO: this is now called in OnRoundReset
-//	AddEffect("TickNewRound", this, 1, 5, this);
 }
 
-global func FxCheckNextRoundEffect(string new_name, object target, proplist effect, var1, var2, var3, var4)
+protected func FxCheckNextRoundEffect(string new_name, object target, proplist effect, var1, var2, var3, var4)
 {
 	if(new_name == "CheckNextRound") return -1;
 }
 
-global func FxCheckNextRoundTimer(target, effect, time)
+protected func FxCheckNextRoundTimer(target, effect, time)
 {
 	var teams = [];
 	for(var i = 0; i < GetPlayerCount(); ++i)
@@ -283,7 +280,7 @@ global func FxCheckNextRoundTimer(target, effect, time)
 	
 	if(found_team != nil)
 		GetRoundHelper()->TeamWonRound(found_team);
-	else AddEffect("TickNewRound", nil, 1, 5, nil);
+	else DoRoundCountdown();
 	
 	return -1;
 }
@@ -496,4 +493,15 @@ private func PlaceGoal()
 		// timer
 		CreateObject(HUD_CaedesTimer);
 	}
+}
+
+
+private func DoRoundCountdown()
+{
+	if (!IsRoundCountdown()) AddEffect("TickNewRound", this, 1, 5, this);
+}
+
+public func IsRoundCountdown()
+{
+    return GetEffect("TickNewRound", this);
 }

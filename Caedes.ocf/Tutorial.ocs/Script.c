@@ -84,8 +84,8 @@ global func GetPlayerRespawnPosition(plr)
 global func FxTutorialCheckTimer(target, effect, time)
 {
 	if(GetCursor(PLAYER)->Contained()) return 1;
-	if(GetEffect("TickNewRound", nil)) return 1;
-	
+	if(GetRoundHelper()->IsRoundCountdown()) return 1;
+
 	var data = round_data[current_step];
 	if(data->check())
 	{
