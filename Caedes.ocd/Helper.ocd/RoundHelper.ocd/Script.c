@@ -72,41 +72,7 @@ public func OnRoundStart(int counter)
 	if (!AnnounceNewRound()) return;
 
 	// respawn players
-	for(var i = 0; i < GetPlayerCount(); ++i)
-	{
-		var p = GetPlayerByIndex(i);
-		CaedesDoWealth(p, 75);
-		var c = GetCrew(p);
-		if(!c) continue; // wat
-		if(c->Contained()) c->Exit();
-
-		AddEffect("NewRound", c, 1, 35*5, nil);
-
-		var pos = GetPlayerRespawnPosition(p);
-		c->SetPosition(pos.x, pos.y);
-		c->DoEnergy(100);
-
-		SetCursor(p, c);
-
-		AddEffect("HoldPlayersInPlace", c, 1, Caedes_ShoppingTime, nil, RoundHelper);
-
-		var obj;
-		for(var t = c->ContentsCount(); obj = c->Contents(--t);)
-		{
-			obj->~OnNewRound();
-		}
-
-
-		SetPlayerZoomByViewRange(p, CAEDES_ViewRange, CAEDES_ViewRange, PLRZOOM_LimitMax);
-		SetPlayerZoomByViewRange(p, CAEDES_ViewRange, CAEDES_ViewRange);
-
-		c->~UpdateHUD();
-		//AddEffect("LogDamage", c, 1, 70, nil,  nil);
-		Scoreboard->SetPlayerData(p, "player_dead", "");
-	
-		var m = c->~GetMenu();
-		if(m) m->~Close();
-	}
+	RespawnPlayers();
 
 	// remove weapons
 	for(var obj in FindObjects(Find_NoContainer()))
@@ -480,4 +446,43 @@ private func AnnounceNewRound()
 	else CustomMessage("$NewRoundShort$");
 	
 	return true;
+}
+
+private func RespawnPlayers()
+{
+	for(var i = 0; i < GetPlayerCount(); ++i)
+	{
+		var p = GetPlayerByIndex(i);
+		CaedesDoWealth(p, 75);
+		var c = GetCrew(p);
+		if(!c) continue; // wat
+		if(c->Contained()) c->Exit();
+
+		AddEffect("NewRound", c, 1, 35*5, nil);
+
+		var pos = GetPlayerRespawnPosition(p);
+		c->SetPosition(pos.x, pos.y);
+		c->DoEnergy(100);
+
+		SetCursor(p, c);
+
+		AddEffect("HoldPlayersInPlace", c, 1, Caedes_ShoppingTime, nil, RoundHelper);
+
+		var obj;
+		for(var t = c->ContentsCount(); obj = c->Contents(--t);)
+		{
+			obj->~OnNewRound();
+		}
+
+
+		SetPlayerZoomByViewRange(p, CAEDES_ViewRange, CAEDES_ViewRange, PLRZOOM_LimitMax);
+		SetPlayerZoomByViewRange(p, CAEDES_ViewRange, CAEDES_ViewRange);
+
+		c->~UpdateHUD();
+		//AddEffect("LogDamage", c, 1, 70, nil,  nil);
+		Scoreboard->SetPlayerData(p, "player_dead", "");
+	
+		var m = c->~GetMenu();
+		if(m) m->~Close();
+	}
 }
