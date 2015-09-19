@@ -97,6 +97,14 @@ public func TriggerRoundEnd()
 public func OnRoundEnd(int counter)
 {
 	Log("[%d] RoundHelper: Round %d ends", FrameCounter(), counter);
+	ClearRoundEffects();
+	
+	// stop timer!
+	StopGameCounter(true);
+
+	// round over message after score gain
+	if(!GameCall("RejectRoundOverMessage"))
+		ShowRoundOverMessage();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,13 +220,9 @@ func ClearRoundEffects()
 
 func TeamWonRound(int team)
 {
+    // TODO: this should not be possible anyway...
 	// already over
-	if (IsRoundCountdown()) return;
-
-	ClearRoundEffects();
-
-	// stop timer!
-	StopGameCounter(true);	
+	// if (IsRoundCountdown()) return;
 
 	var players_winlose = [[],[]];
 
@@ -231,13 +235,10 @@ func TeamWonRound(int team)
 		DoPlrScore(p, 20);
 	}
 
-	// round over message after score gain
-	if(!GameCall("RejectRoundOverMessage"))
-		ShowRoundOverMessage();
-
 	// inc score
 	Scoreboard->SetData(CdsTeamID(team), "score", ++Caedes_team_score[team]);
 
+    // some stuff for the league!
 	Z4PlayersWonRound(players_winlose[0], players_winlose[1]);
 }
 
