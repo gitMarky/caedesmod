@@ -65,35 +65,8 @@ public func OnRoundStart(int counter)
 	// starting again!
 	StopGameCounter(false);
 
-	// first check whether only one team remaining (time out etc)
-	var a_teams = [0, 0, 0, 0, 0];
-	for(var pcnt = 0; pcnt < GetPlayerCount(); ++pcnt)
-	{
-		var plr = GetPlayerByIndex(pcnt);
-
-		// also reset per-round data
-		Caedes_player_round_score[plr] = 0;
-		Caedes_player_round_damage[plr] = 0;
-
-		var team;
-		if(team = GetPlayerTeam(plr))
-			++a_teams[team];
-	}
-
-	var team_count = 0;
-	for(var ti = 0; ti < GetLength(a_teams); ++ti)
-	{
-		if(a_teams[ti]) ++team_count;
-	}
-
-	if(team_count == 1) // exactly one team remaining
-		if(GetPlayerCount() < GetLength(Caedes_player_score)) // at least one player left
-		{
-			// end game instantly!
-			EndGame();
-			return true;
-		}
-	// end elim check
+    // end the game if one team is eliminated
+    if (DoTeamEliminationCheck()) return;
 
 	// some announcing
 	if(GetMaximumRoundTime())
@@ -464,4 +437,39 @@ func FxDelayGoSoundTimer()
 {
 	Sound("Go", nil, 50);
 	return -1;
+}
+
+
+private func DoTeamEliminationCheck()
+{
+	// first check whether only one team remaining (time out etc)
+	var a_teams = [0, 0, 0, 0, 0];
+	for (var pcnt = 0; pcnt < GetPlayerCount(); ++pcnt)
+	{
+		var plr = GetPlayerByIndex(pcnt);
+
+		// also reset per-round data
+		Caedes_player_round_score[plr] = 0;
+		Caedes_player_round_damage[plr] = 0;
+
+		var team;
+		if(team = GetPlayerTeam(plr))
+			++a_teams[team];
+	}
+
+	var team_count = 0;
+	for (var ti = 0; ti < GetLength(a_teams); ++ti)
+	{
+		if(a_teams[ti]) ++team_count;
+	}
+
+	if (team_count == 1 // exactly one team remaining
+    && (GetPlayerCount() < GetLength(Caedes_player_score))) // at least one player left
+	{
+		// end game instantly!
+		EndGame();
+		return true;
+	}
+	// end elim check
+    return false;
 }
