@@ -77,27 +77,8 @@ public func OnRoundStart(int counter)
 	// remove weapons
     RemoveWeapons();
 
-	// if bombing goal, place bomb
-	if(ObjectCount(Find_ID(Goal_Destruction)))
-	{
-		Caedes_BombingTeam = 3 - Caedes_BombingTeam;
-
-		// find random player of team
-		var pos = GetTeamSpawnPosition(Caedes_BombingTeam);
-		var bomb = CreateObject(BigBomb, pos.x, pos.y, NO_OWNER);
-		bomb.team = Caedes_BombingTeam;
-
-		// announce for planting team
-		for(var i = 0; i < GetPlayerCount(); ++i)
-		{
-			var plr = GetPlayerByIndex(i);
-			if(GetPlayerTeam(plr) != Caedes_BombingTeam) continue;
-			Symbol_InfoYourTeamHasBomb->ShowFor(plr);
-		}
-
-		// timer
-		CreateObject(HUD_CaedesTimer);
-	}
+    // place goal object
+    PlaceGoal();
 
     // TODO: this should not be necessary anymore
 	// respawn deceoration
@@ -489,5 +470,30 @@ private func RemoveWeapons()
 	{
 		if(obj->~IsWeapon() || obj->GetDefCoreVal("Projectile", "DefCore") == 1)
 			obj->RemoveObject();
+	}
+}
+
+private func PlaceGoal()
+{
+	// if bombing goal, place bomb
+	if(ObjectCount(Find_ID(Goal_Destruction)))
+	{
+		Caedes_BombingTeam = 3 - Caedes_BombingTeam;
+
+		// find random player of team
+		var pos = GetTeamSpawnPosition(Caedes_BombingTeam);
+		var bomb = CreateObject(BigBomb, pos.x, pos.y, NO_OWNER);
+		bomb.team = Caedes_BombingTeam;
+
+		// announce for planting team
+		for(var i = 0; i < GetPlayerCount(); ++i)
+		{
+			var plr = GetPlayerByIndex(i);
+			if(GetPlayerTeam(plr) != Caedes_BombingTeam) continue;
+			Symbol_InfoYourTeamHasBomb->ShowFor(plr);
+		}
+
+		// timer
+		CreateObject(HUD_CaedesTimer);
 	}
 }
