@@ -20,7 +20,7 @@ static Caedes_team_deaths;
 static Caedes_smoke_count;
 
 // time in seconds
-global func GetMaximumRoundTime(){return 60 * 15;}
+global func GetMaximumGameTime(){return 60 * 15;}
 
 global func CdsTeamID(int team)
 {
@@ -416,9 +416,9 @@ global func ShowRoundOverMessage()
 		msg = Format("%s|%s ~ <c eeee66>$%3d</c> [DMG %2d]", msg, name, p.score, p.damage/1000);
 	}
 	
-	if(GetMaximumRoundTime())
+	if(GetMaximumGameTime())
 	{
-		var time = Max(0, GetMaximumRoundTime() - GetGameCounter());
+		var time = Max(0, GetMaximumGameTime() - GetGameCounter());
 		msg = Format("%s||$TimeLeft$", msg, time/60, time%60);
 	}
 	CustomMessage(msg, nil, nil, 0, 200, 0xffffff, GUI_MenuDeco, CaedesLogo, MSG_HCenter | MSG_NoLinebreak);

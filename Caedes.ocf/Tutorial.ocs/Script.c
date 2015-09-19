@@ -9,7 +9,7 @@ static purchaseable;
 
 static const STD_TIME = 90;
 
-global func GetMaximumRoundTime(){return 0;}
+global func GetMaximumGameTime(){return 0;}
 
 func RejectRoundOverMessage(){return true;}
 

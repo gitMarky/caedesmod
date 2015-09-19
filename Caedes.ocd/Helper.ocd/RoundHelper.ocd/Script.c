@@ -394,13 +394,13 @@ private func DoTeamEliminationCheck()
 
 private func AnnounceNewRound()
 {
-	if(GetMaximumRoundTime())
+	if(GetMaximumGameTime())
 	{
-		var t = GetMaximumRoundTime() - GetGameCounter();
+		var t = GetMaximumGameTime() - GetGameCounter();
 		if(t < 0) t = 0;
 
 
-		if((t < GetMaximumRoundTime() / 2) && !Caedes_Halftime_announced)
+		if((t < GetMaximumGameTime() / 2) && !Caedes_Halftime_announced)
 		{
 			Caedes_Halftime_announced = true;
 			ExecuteHalftime();
