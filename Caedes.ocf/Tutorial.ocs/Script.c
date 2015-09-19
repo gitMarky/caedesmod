@@ -134,7 +134,7 @@ func OnRoundStart(int round)
 		RoundManager()->RemoveRoundEndBlocker(GetRoundHelper());
 	}
 
-   //former func OnNewRound()
+   //former func OnNewRound
 
 	purchaseable = [];
 	

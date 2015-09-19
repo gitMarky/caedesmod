@@ -77,12 +77,6 @@ public func OnRoundStart(int counter)
     // place goal object
     PlaceGoal();
 
-    // TODO: this should not be necessary anymore
-	// respawn deceoration
-	//for(var obj in FindObjects(Find_ID(DecoRespawner)))
-	//	obj->OnNewRound();
-
-	GameCall("OnNewRound"); // TODO: replace this call with the one from Round Manager
 
 	AddEffect("CheckNextRound", this, 1, 30, this);
 	AddEffect("DelayGoSound", nil, 1, Caedes_ShoppingTime, nil, RoundHelper);
