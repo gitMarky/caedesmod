@@ -1,6 +1,6 @@
 Welcome1=Welcome to the round-based team shooter Caedes.
 Welcome2=We want to get you right into the game - usually you would start by buying some stuff after you spawn.
-Welcome3=Go to your flag, hit E and buy some stuff!
+Welcome3=Go to your flag, hit E and buy some stuff (at least 3 items)!
 WelcomeEnd=Good job, now we really get started with some practice.
 WelcomeInfo=Go to your flag and open the shop with E. Purchase stuff.
 
