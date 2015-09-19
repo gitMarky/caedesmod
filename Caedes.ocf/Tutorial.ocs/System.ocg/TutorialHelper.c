@@ -21,8 +21,12 @@ global func TutorialMessage(string strMessage)
 {
 	// Message with speech marker
 	if (HasSpeech(strMessage))
+	{
 		// PlayerMessage will handle the speech output (and it won't show the message)
-		PlayerMessage(0, strMessage);
+		var dummy = CreateObject(Dummy);
+		dummy->PlayerMessage(0, strMessage);
+		dummy->RemoveObject();
+	}
 	// Normal message display, in addition to speech output
 	if (GetLength(strMessage)) strMessage = Format("@%s", strMessage);
 	CustomMessage(strMessage, nil, nil, g_msgoffx, g_msgoffy, 0xffffff, GUI_MenuDeco, CaedesLogo, g_msgpos | MSG_DropSpeech, g_msgwdt);
