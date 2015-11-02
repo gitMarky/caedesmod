@@ -43,24 +43,27 @@ func MakeMenu(string what, int priority)
 	var menu =
 	{
 		Priority = priority,
-		Margin = 5,
 		BackgroundColor = RGBa(0, 0, 0, 200),
 		Style = GUI_FitChildren,
 		titlebar = 
 		{
-			Bottom = "1em",
+			Bottom = "1.25em",
 			Symbol = 0,
-			Text = Format("<c %x>%s</c>", purple, text),
+			text = 
+			{
+				Left = "1em",
+				Text = Format("<c %x>%s</c>", purple, text)
+			},
 			bottomline = 
 			{
-				Top = "100% - 0.5em",
+				Top = "100% - 0.1em",
 				BackgroundColor = purple
 			}
 		},
 		contents =
 		{
 			Style = GUI_GridLayout | GUI_FitChildren,
-			Top = "1.25em", Left = "0.5em", Bottom = "100% - 0.5em", Right = "100% - 0.5em"
+			Top = "1.5em", Left = "0.5em", Bottom = "100% - 0.5em", Right = "100% - 0.5em"
 		}
 	};
 	
