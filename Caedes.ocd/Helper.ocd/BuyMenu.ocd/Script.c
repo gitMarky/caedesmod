@@ -122,7 +122,7 @@ func MakeMenu(string what, int priority)
 }
 
 
-public func OnItemSelection(object item)
+public func OnItemSelection(proplist item)
 {
 	var plr = menu_object->GetOwner();
 	var ID = item;
@@ -186,7 +186,7 @@ func BuyWeapon(plr, ID)
 		}
 	
 	if(
-		((menu_object->ContentsCount() >= menu_object->MaxContentsCount()) && (!ID->~NeedsNoSlot()))
+		((menu_object->ContentsCount() >= menu_object.MaxContentsCount) && (!ID->~NeedsNoSlot()))
 		|| ID->~RejectPurchase(menu_object)
 		)
 	{
