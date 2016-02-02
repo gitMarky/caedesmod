@@ -82,7 +82,6 @@ func MakeMenu(string what, int priority)
 		++counter;
 		
 		// prepare desc graphics
-		var dummy = CreateContents(Dummy);
 		var desc_ID = nil;//GUI_CaedesTextContainer;
 		var desc = obj->~GetDescID();
 		if (GetType(desc) == C4V_Def)
@@ -90,8 +89,7 @@ func MakeMenu(string what, int priority)
 			desc_ID = desc;
 			desc = "Info";
 		}
-		dummy->SetGraphics(desc, desc_ID, 1, GFXOV_MODE_Picture, nil, GFX_BLIT_Parent);
-		
+
 		var item =
 		{
 			BackgroundColor = {Std = RGB(50, 50, 50), OnHover = RGB(100, 0, 0)},
@@ -102,12 +100,16 @@ func MakeMenu(string what, int priority)
 				Right = "2.5em",
 				Symbol = GetTitleDef(obj)
 			},
+			title = 
+			{
+				Style = GUI_TextRight | GUI_TextTop,
+				Text = Format("<c %x>%s</c>", RGB(255, 80, 255), obj->GetName())
+			},
 			desc =
 			{
 				Left = "2.5em",
-				Symbol = dummy,
 				Style = GUI_TextBottom | GUI_TextRight,
-				Text = Format("%d Credits", obj->GetValue())
+				Text = Format("<c %x>%d$</c>", RGBa(255, 255, 0, 128), obj->GetValue()),
 			},
 			OnMouseIn = GuiAction_SetTag("OnHover"),
 			OnMouseOut = GuiAction_SetTag("Std"),
