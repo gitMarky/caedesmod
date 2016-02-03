@@ -23,7 +23,6 @@
 		[Assignment]
 		Key=Q
 		Control=Backpack
-		Group=1
 		
 		[Assignment]
 		Key=Mouse1Move
