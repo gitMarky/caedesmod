@@ -33,10 +33,10 @@ func FxFuseBurnTimer(object bomb, int num, int timer)
 	var x = +Sin(GetR(), i);
 	var y = -Cos(GetR(), i);
 	CreateParticle("StarSpark", x, y, PV_Random(x - 2, x + 2), PV_Random(y - 2, y + 2), PV_Random(10, 40), Particles_Glimmer(), 5);
-	if(timer == 1) Sound("FuseLoop",nil,nil,nil,+1);
+	if(timer == 1) Sound("Fire::FuseLoop",nil,nil,nil,+1);
 	if(timer >= 60)
 	{
-		Sound("FuseLoop",nil,nil,nil,-1);
+		Sound("Fire::FuseLoop",nil,nil,nil,-1);
 		DoExplode();
 		return -1;
 	}
@@ -55,7 +55,7 @@ func DoExplode()
 		AddEffect("HitCheck2", shrapnel, 1,1, nil,nil, nil);
 	}
 	if(GBackLiquid())
-		Sound("BlastLiquid2");
+		Sound("Fire::BlastLiquid2");
 	else
 		Sound("BlastMetal");
 	

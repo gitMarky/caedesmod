@@ -28,7 +28,7 @@ local rounds;
 
 func Hit()
 {
-	Sound("GeneralHit?");
+	Sound("Hits::GeneralHit?");
 }
 
 local fAiming;	
@@ -230,7 +230,7 @@ func FxIsLoadingTimer(target, effect, time)
 	if(time >= effect.max)
 	{
 		FinishReload();
-		Sound("Click");
+		Sound("UI::Click");
 		return -1;
 	}
 	return 1;
@@ -247,7 +247,7 @@ func FinishReload()
 
 func FireSound()
 {
-	Sound("GunShoot*");
+	Sound("Objects::Weapons::Musket::GunShoot*");
 }
 
 func TryFire(clonk, angle)

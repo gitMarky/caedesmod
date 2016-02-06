@@ -20,7 +20,7 @@ func IsProjectileTarget(){return false;}
 func BlowUp()
 {
 	ExplosionEffect(20);
-	Sound("Blast3");
+	Sound("Fire::Blast3");
 	var particles = 
 	{
 		Prototype = Particles_Smoke(),

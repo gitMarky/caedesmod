@@ -146,11 +146,11 @@ public func OnItemSelection(proplist item)
 		if(PerkChangeDenied(plr))
 		{
 			CustomMessage("<c ff0000>$PerkNextRound$</c>", nil, plr);
-			Sound("Munch?", false, nil, plr);
+			Sound("Clonk::Action::Munch?", false, nil, plr);
 		}
 		else
 		{
-			menu_object->Sound("Breathing", false, 50);
+			menu_object->Sound("Clonk::Action::Breathing", false, 50);
 			
 			var flm = CreateObject(FloatingMessage, menu_object->GetX() - GetX(), menu_object->GetY() - GetY());
 			flm->SetMessage(Format("Perk: %s", ID->GetName()));
@@ -180,7 +180,7 @@ func BuyWeapon(plr, ID)
 		{
 			var returnval = Menu_ReloadWeapons->TryReload(menu_object, menu_object->FindContents(ID));
 			if(returnval > 0)
-				menu_object->Sound("Cash", false, nil, plr);
+				menu_object->Sound("UI::Cash", false, nil, plr);
 			else 
 				if(returnval == 0)
 					Sound("Nope", false, nil, plr);
@@ -204,7 +204,7 @@ func BuyWeapon(plr, ID)
 	
 	DoWealth(plr, -ID->GetValue());
 	menu_object->CreateContents(ID);
-	menu_object->Sound("Cash");
+	menu_object->Sound("UI::Cash");
 	
 	var flm = CreateObject(FloatingMessage, menu_object->GetX() - GetX(), menu_object->GetY() - GetY());
 	flm->SetMessage(Format("%d", -ID->GetValue()));

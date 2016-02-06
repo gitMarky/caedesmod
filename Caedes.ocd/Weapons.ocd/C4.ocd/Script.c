@@ -57,7 +57,7 @@ func FxCheckVisTimer(target, effect, time)
 
 func BlowUpEx()
 {
-	Sound("Click");
+	Sound("UI::Click");
 	ScheduleCall(this, "BlowUp", 10);
 	this.Visibility = (VIS_All);
 }

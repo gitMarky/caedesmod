@@ -52,6 +52,6 @@ func Apply(clnk)
 	
 	if(!found)
 		Sound("Nope", false, nil, plr);
-	else Sound("Cash", false, nil, plr);
+	else Sound("UI::Cash", false, nil, plr);
 }
 

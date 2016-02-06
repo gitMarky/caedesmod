@@ -263,7 +263,7 @@ func FxFalconPunchTimer(target, effect, time)
 			{
 				DoDmg(100, nil, obj, nil, nil, this, Clonk);
 			}
-			Sound("Hurt*");
+			Sound("Clonk::Verbal::Hurt*");
 			effect.Interval = 1;
 			return 1;
 		}

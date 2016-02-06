@@ -50,7 +50,7 @@ protected func Hit()
 	
 	if(self)
 	{
-		Sound("BulletHitGround?");
+		Sound("Objects::Weapons::Musket::BulletHitGround?");
 		CreateImpactEffect(Max(5, damage*2/3));
 	  	
 	  	RemoveObject();
@@ -184,9 +184,9 @@ public func HitObject(object obj, bool no_remove)
 public func OnStrike(object obj)
 {
 	if(obj->GetAlive())
-		Sound("ProjectileHitLiving?");
+		Sound("Hits::ProjectileHitLiving?");
 	else
-		Sound("BulletHitGround?");
+		Sound("Objects::Weapons::Musket::BulletHitGround?");
 }
 
 

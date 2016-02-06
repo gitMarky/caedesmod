@@ -39,7 +39,7 @@ func DoExplode()
 		DoDmg(damage - Min(objdist*2/3, damage*9/10), nil, o, nil, nil, nil, from_ID);
 	}
 
-	Sound("Blast3");
+	Sound("Fire::Blast3");
 	ExplosionEffect(dist);
 	RemoveObject();
 }

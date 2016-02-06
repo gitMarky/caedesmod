@@ -84,7 +84,7 @@ global func DoPlrScore(int plr, int amount)
 	Caedes_player_round_score[plr] += amount;
 	
 	CaedesDoWealth(plr, amount);
-	Sound("Cash", false, 50, plr);
+	Sound("UI::Cash", false, 50, plr);
 	Caedes_player_score[plr] += amount;
 	Scoreboard->SetPlayerData(plr, "score", Format("<c 999955>%d</c>", Caedes_player_score[plr]), Caedes_player_score[plr]);
 	

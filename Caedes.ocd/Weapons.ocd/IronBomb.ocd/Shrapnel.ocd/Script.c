@@ -29,7 +29,7 @@ protected func Hit()
 public func HitObject(object obj)
 {
 	DoDmg(damage, nil, obj, nil, nil, nil, from_ID);
-	Sound("ProjectileHitLiving?");
+	Sound("Hits::ProjectileHitLiving?");
 	RemoveObject();
 }
 

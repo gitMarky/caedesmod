@@ -81,7 +81,7 @@ func Hit(int x, int y)
 	if(remaining_time < 10) remaining_time = 0;
 	ScheduleCall(this, "BlowUp", Max(1, remaining_time - GetActTime()));
 	
-	Sound("DullMetalHit*");
+	Sound("Hits::Materials::Metal::DullMetalHit*");
 	
 	for(var i = 0; i < 15; ++i)
 	{
