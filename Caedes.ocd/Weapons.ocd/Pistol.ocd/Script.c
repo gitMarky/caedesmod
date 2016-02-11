@@ -14,7 +14,7 @@ func TitleDef(){return Pistol_Title;}
 public func IsArmoryProduct() { return true; }
 
 func Definition(def) {
-	SetProperty("PictureTransformation", Trans_Mul(Trans_Scale(2000, 2000, 2000), Trans_Translate(0000, 3000, 000), Trans_Rotate(270, 0, 0, 1), Trans_Rotate(270, 1 ,0, 0)), def);
+	def.PictureTransformation = Trans_Mul(Trans_Scale(1500, 1500, 1500), Trans_Translate(4000, -1500, 0), Trans_Rotate(270, 0, 1, 0), Trans_Rotate(-50, 1 ,0, 0));
 }
 
 local Name = "$Name$";
