@@ -1,2 +1,2 @@
-Name=Smoke Grenade
+Name=Smoke
 Description=Opaque barrier.
