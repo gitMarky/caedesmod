@@ -1,2 +1,2 @@
 Name=C4
-Description=Can be thrown and triggered later.
+Description=Kann geworfen und dann später gezündet werden.
