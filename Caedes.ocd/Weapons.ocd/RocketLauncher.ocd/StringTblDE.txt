@@ -1,3 +1,2 @@
 Name=RPG
-Description=Boom!
-UsageHelp=Zielen und Schiessen!
+Description=Einmalige Benutzung. Schiesst eine Rakete.

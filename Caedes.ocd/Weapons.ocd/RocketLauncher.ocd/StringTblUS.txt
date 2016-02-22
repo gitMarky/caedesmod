@@ -1,3 +1,2 @@
 Name=RPG
-Description=Boom!
-UsageHelp=Aim and launch!
+Description=One time use. Fires a rocket.
