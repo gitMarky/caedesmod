@@ -1,3 +1,2 @@
 Name=Shotgun
 Description=Low fire rate and range, high dispersion.|Ammo: 1/10
-UsageHelp=Aim and shoot with [Use]. The musket needs lead shots as ammunition.
