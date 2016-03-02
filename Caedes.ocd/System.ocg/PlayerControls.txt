@@ -4,12 +4,10 @@
 	Identifier=Backpack
 	GUIName=Backpack
 	GUIDesc=Open/close backpack
-	SendCursorPos=1
 	
 	[ControlDef]
 	Identifier=CaedesAimingCursor
 	DefaultDisabled=1
-	SendCursorPos=1
 	
 [ControlSets]
 
