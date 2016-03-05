@@ -58,7 +58,7 @@ func Hit(int x, int y)
 	var angle = Angle(0, 0, x, y);
 	var speed = Distance(0, 0, x, y);
 	var vec = GetSurfaceVector(0, 0);
-	var axis = GetAngleFromVector(vec);
+	var axis = Angle(0, 0, vec[0], vec[1]);
 	var new_angle = MirrorAngle(angle, axis);
 	SetXDir(Sin(new_angle, speed) + RandomX(-50, 50), 100);
 	SetYDir(-Cos(new_angle, speed) + RandomX(-50, 50), 100);
