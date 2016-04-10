@@ -12,7 +12,7 @@ func IsPrimaryWeapon(){return false;}
 
 public func GetCarryTransform()
 {
-	return Trans_Rotate(-0, 0, 1, 0);
+	return Trans_Mul(Trans_Rotate(-90, 0, 1, 0), Trans_Rotate(90, 1, 0, 0));
 }
 
 local animation_set;
