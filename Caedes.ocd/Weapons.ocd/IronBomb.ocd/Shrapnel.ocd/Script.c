@@ -12,7 +12,7 @@ protected func Initialize()
 	AddEffect("Fade", this, 1, 1, this);
 }
 
-protected func FxFadeTimer(object target, int num, int timer)
+protected func FxFadeTimer(object target, effect fx, int timer)
 {
 	if(timer > flight_time) {Hit(); return -1;}
 }
