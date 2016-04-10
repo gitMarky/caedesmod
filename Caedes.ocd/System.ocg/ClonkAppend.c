@@ -79,7 +79,7 @@ func FxOverallDamageStuffDamage(pTarget, iEffectNumber, iDmgEngy, iCause, iBy)
 				
 				if(!obj->~NoRemove())
 				{
-					AddEffect("ScheduledRemove", obj, 1, 1, 0, Clonk, pTarget);
+					AddEffect("ScheduledRemove", obj, 1, 1, nil, Clonk, pTarget);
 					pTarget.kill_bounty += Max(1, (obj->GetValue() / 5)) * 2;
 				}
 			}
