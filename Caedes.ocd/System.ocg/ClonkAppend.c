@@ -105,6 +105,27 @@ func FxOverallDamageStuffDamage(pTarget, iEffectNumber, iDmgEngy, iCause, iBy)
 				{
 					Caedes_player_round_damage[iBy] += Min(-iDmgEngy, pTarget->GetEnergy() * 1000);
 				}
+			
+			// You see the damage you deal to enemies.
+			if (iBy != NO_OWNER)
+			{
+				var helper = FindObject(Find_ID(FloatingMessage), Find_Owner(iBy), Find_ActionTarget(this));
+				if (!helper)
+				{
+					helper = CreateObject(FloatingMessage, nil, -5, iBy);
+					helper.Visibility = VIS_Owner;
+					helper.damage = 0;
+					helper->SetAction(helper->GetAction(), this, nil, true);
+					helper->FadeOut(1, 3);
+					helper->SetYDir(-1);
+				}
+				helper.damage += -iDmgEngy;
+				helper.alpha = 255;
+				helper->SetPosition(GetX(), GetY() - 5);
+				helper->SetMessage(Format("-%d", helper.damage / 1000));
+				var clr = BoundBy(helper.damage / 100, 0, 255);
+				helper->SetColor(clr, 255 - clr, 0);
+			}
 		}
 	}
 
