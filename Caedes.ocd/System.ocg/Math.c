@@ -6,9 +6,3 @@ global func MirrorAngle(int angle1, int axis)
 	a = Normalize(a);
 	return axis + a;
 }
-
-
-global func GetAngleFromVector(vec1)
-{
-	return Angle(0, 0, vec1.x, vec1.y);
-}
