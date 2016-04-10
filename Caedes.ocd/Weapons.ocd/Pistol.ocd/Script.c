@@ -47,8 +47,8 @@ local animation_set;
 local weapon_properties =
 {
 	max_ammo = 50,
-	clip = 10,
-	recharge = 10,
+	clip = 8,
+	recharge = 20,
 	
 	spread = 1,
 	spread_factor = 100,
