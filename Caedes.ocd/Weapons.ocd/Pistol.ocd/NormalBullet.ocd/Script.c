@@ -124,13 +124,13 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	{
 		var particle_ray = 
 		{
-			Size = 8,
-			Alpha = PV_Linear(200,0),
+			Size = 6,
+			Alpha = PV_Linear(255,0),
 			BlitMode = GFX_BLIT_Additive,
 			Rotation = angle / 100,
-			B = 100
+			B = 150
 		};
-		DrawParticleLine("RaySpark", x_p - GetX(), y_p - GetY(), 0, 0, 4, 0, 0, 10, particle_ray);
+		DrawParticleLine("RaySpark", x_p - GetX(), y_p - GetY(), 0, 0, 4, 0, 0, 3, particle_ray);
 	}
 	
 	var self = this;
