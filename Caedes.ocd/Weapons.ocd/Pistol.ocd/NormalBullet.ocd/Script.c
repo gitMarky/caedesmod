@@ -14,7 +14,7 @@ local instant;
 
 protected func Initialize()
 {
-	speed = 15;
+	speed = 25;
 	SetAction("Travel");
 }
 
@@ -89,6 +89,15 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	fx.dist = dist;
 	fx.dmg = dmg;
 	fx.shooter = shooter;
+	fx.particle_ray = 
+		{
+			Size = 5,
+			Alpha = PV_Linear(255,0),
+			BlitMode = GFX_BLIT_Additive,
+			Rotation = fx.a / 100,
+			G = 200,
+			B = 100
+		};
 	
 	/*
 	// set position to final point
@@ -160,15 +169,6 @@ func FxTravelStart(object target, proplist fx, int temporary)
 {
 	fx.ox = GetX();
 	fx.oy = GetY();
-	
-	fx.particle_ray = 
-		{
-			Size = 8,
-			Alpha = PV_Linear(255,0),
-			BlitMode = GFX_BLIT_Additive,
-			Rotation = fx.a / 100,
-			B = 100
-		};
 }
 
 func FxTravelTimer(object target, proplist fx, int time)
@@ -176,7 +176,17 @@ func FxTravelTimer(object target, proplist fx, int time)
 	var tx = GetX() + Sin(fx.a, speed, 100);
 	var ty = GetY() + -Cos(fx.a, speed, 100);
 	
-	for (obj in FindObjects(
+	var coords = PathFree2(GetX(), GetY(), tx, ty);
+	var hit = false;
+	
+	if(coords)
+	{
+		tx = coords[0];
+		ty = coords[1];
+		hit = true;
+	}
+	
+	for (var obj in FindObjects(
 								Find_OnLine(tx - GetX(), ty - GetY(), 0, 0),
 								Find_NoContainer(),
 								//Find_Layer(GetObjectLayer()),
@@ -194,17 +204,31 @@ func FxTravelTimer(object target, proplist fx, int time)
 		}
 	}
 	
-	
-	var coords = PathFree2(GetX(), GetY(), tx, ty);
-	if(coords)
+	for(var obj in FindObjects(Find_OnLine(tx - GetX(), ty - GetY()), Find_Func("IsProjectileInteractionTarget")))
 	{
-		SetPosition(tx, ty);
+		obj->~OnProjectileInteraction(tx, ty, fx.a, fx.shooter, fx.dmg);
+	}
+	
+	
+	SetPosition(tx, ty);
+	if(time)
+	{
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+	}
+	
+	fx.ox = GetX();
+	fx.oy = GetY();
+	
+	if(hit)
+	{
 		Hit();
 		return -1;
 	}
-	
-	SetPosition(tx, ty);
-	DrawParticleLine("RaySpark", tx - GetX(), ty - GetY(), 0, 0, 4, 0, 0, 10, fx.particle_ray);
 }
 
 func FxTravelStop(object target, proplist fx, int reason, bool temporary)
