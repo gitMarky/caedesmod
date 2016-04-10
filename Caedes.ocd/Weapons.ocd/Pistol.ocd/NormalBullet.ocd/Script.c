@@ -122,10 +122,15 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	
 	if(!shooter.silencer)
 	{
-		var t = CreateObject(Bullet_TrailEffect, 0, 0, NO_OWNER);
-		t->Point({x = x_p, y = y_p}, {x = GetX(), y = GetY()});
-		t->FadeOut();
-		t->SetObjectBlitMode(GFX_BLIT_Additive);
+		var particle_ray = 
+		{
+			Size = 8,
+			Alpha = PV_Linear(200,0),
+			BlitMode = GFX_BLIT_Additive,
+			Rotation = angle / 100,
+			B = 100
+		};
+		DrawParticleLine("RaySpark", x_p - GetX(), y_p - GetY(), 0, 0, 4, 0, 0, 10, particle_ray);
 	}
 	
 	var self = this;
