@@ -284,6 +284,7 @@ func Fire(clonk, angle)
 	{
 		FireSound();
 		FireEffect(clonk, angle, x, y);
+		FireScreenshake(clonk);
 	}
 	FireShot(clonk, angle, x, y, range);
 	
@@ -373,6 +374,11 @@ func FireEffect(clonk, angle, off_x, off_y)
 {
 	clonk->CreateMuzzleFlash(off_x, off_y, angle, 10);
 	CreateCartridgeEffect(6, Sin(-angle, 10), -RandomX(6, 12));
+}
+
+func FireScreenshake(clonk)
+{
+	ShakeViewport(10, 0, 0, 10);
 }
 
 func AddDeviation()
