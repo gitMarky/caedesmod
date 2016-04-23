@@ -91,12 +91,12 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	fx.shooter = shooter;
 	fx.particle_ray = 
 		{
-			Size = 5,
+			Size = 3,
 			Alpha = PV_Linear(255,0),
 			BlitMode = GFX_BLIT_Additive,
 			Rotation = fx.a / 100,
 			G = 200,
-			B = 100
+			B = 100,
 		};
 	
 	/*
@@ -178,6 +178,7 @@ func FxTravelTimer(object target, proplist fx, int time)
 	
 	var coords = PathFree2(GetX(), GetY(), tx, ty);
 	var hit = false;
+	var objhit = false;
 	
 	if(coords)
 	{
@@ -195,18 +196,18 @@ func FxTravelTimer(object target, proplist fx, int time)
 								Sort_Distance(tx - GetX(), ty - GetY())
 							))
 	{
-		if (obj->~IsProjectileTarget(this, fx.shooter) || obj->GetOCF() & OCF_Alive)
+		if(obj->~IsProjectileInteractionTarget())
+		{
+			obj->~OnProjectileInteraction(tx, ty, fx.a, fx.shooter, fx.dmg);
+		}
+		
+		if (!objhit && (obj->~IsProjectileTarget(this, fx.shooter) || obj->GetOCF() & OCF_Alive))
 		{
 			var objdist = Distance(tx, ty, obj->GetX(), obj->GetY());
 			SetPosition(tx + Sin(fx.a, objdist, 100), ty - Cos(fx.a, objdist, 100));
 			HitObject(obj, true);
-			break;
+			objhit=true;
 		}
-	}
-	
-	for(var obj in FindObjects(Find_OnLine(tx - GetX(), ty - GetY()), Find_Func("IsProjectileInteractionTarget")))
-	{
-		obj->~OnProjectileInteraction(tx, ty, fx.a, fx.shooter, fx.dmg);
 	}
 	
 	
@@ -214,11 +215,11 @@ func FxTravelTimer(object target, proplist fx, int time)
 	if(time)
 	{
 		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+		/*DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
 		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
 		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
 		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
-		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
-		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);*/
 	}
 	
 	fx.ox = GetX();
