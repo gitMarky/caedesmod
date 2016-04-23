@@ -53,6 +53,7 @@
 75=BackWall-Concrete1Back
 76=BackWall-Concrete2Back
 80=BackWall-cBrick1Back
+81=BackWall-gore
 100=Wall-Concrete1
 101=Wall-Concrete2
 105=Wall-cBrick1

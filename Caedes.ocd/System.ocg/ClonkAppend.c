@@ -170,6 +170,7 @@ func Death()
 {
 	var e = AddEffect("FadeOut", this, 1, 2, this);
 	e.fade_speed = 20;
+	CastObjects(Flesh, 8, 50);
 	return _inherited(...);
 }
 
