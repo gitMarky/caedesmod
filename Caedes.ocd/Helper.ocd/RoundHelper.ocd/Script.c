@@ -106,6 +106,7 @@ func InitPlayer(plr, old)
 	
 	var clnk = GetCrew(plr);
 	if(!clnk) {Log("Init player with no valid Clonk called"); return;} // wat
+	clnk->SetLightRange(200, 10);
 	ApplyPerks(plr);
 	var obj = CreateObject(RoundHelper, x - GetX(), y - GetX());
 	clnk->Enter(obj);
