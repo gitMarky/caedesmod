@@ -82,6 +82,11 @@ func FireEffect(clonk, angle, off_x, off_y)
 	CreateCartridgeEffect(5, -Sin(angle,500)/80, -RandomX(6,12));
 }
 
+func FireScreenshake(clonk)
+{
+	ShakeViewport(20, 0, 0, 10);
+}
+
 func Definition(def) {
 	SetProperty("PictureTransformation",Trans_Mul(Trans_Rotate(90,0,1,0),Trans_Rotate(270,0,0,1)),def);
 }
