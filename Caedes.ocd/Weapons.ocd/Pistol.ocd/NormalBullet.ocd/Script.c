@@ -91,8 +91,8 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	fx.shooter = shooter;
 	fx.particle_ray = 
 		{
-			Size = 3,
-			Alpha = PV_Linear(255,0),
+			Size = 4,
+			Alpha = PV_KeyFrames(0, 0, 255, 500, 255, 1000, 0),
 			BlitMode = GFX_BLIT_Additive,
 			Rotation = fx.a / 100,
 			G = 200,
