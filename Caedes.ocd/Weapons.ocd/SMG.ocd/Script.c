@@ -16,15 +16,15 @@ local animation_set;
 local weapon_properties =
 {
 	max_ammo = 100,
-	clip = 50,
-	recharge = 3,
+	clip = 5,
+	recharge = 1,
 	
-	spread = 600,
+	spread = 300,
 	spread_factor = 200,
 	//spread_decrease = 50,
 	
 	bullet_id = NormalBullet,
-	damage = 3,
+	damage = 6,
 	range = 200,
 	
 	bullet_distance = 10,
@@ -46,7 +46,7 @@ func Initialize()
 		AimMode        = AIM_Position, // The aiming animation is done by adjusting the animation position to fit the angle
 		AnimationAim   = "MusketAimArms",
 		AnimationLoad  = "MusketLoadArms",
-		LoadTime       = 80,
+		LoadTime       = 40,
 		AnimationShoot = nil,
 		ShootTime      = 20,
 		WalkSpeed      = nil,
@@ -58,7 +58,7 @@ local iBarrel;
 
 func FireSound()
 {
-	Sound("SMG1", nil, 50);
+	SoundAt("SMG1", 0, 0, 50);
 }
 
 func FireEffect(clonk, angle, off_x, off_y)
