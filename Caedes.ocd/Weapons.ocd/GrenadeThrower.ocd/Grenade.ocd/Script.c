@@ -41,16 +41,25 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	SetAction("Travel");
 	SetSpeed(Sin(angle, range * 5, 100), -Cos(angle, range * 5, 100), 100);
 
-	AddEffect("SmokeTrail", this, 1, 1, this);
+	var fx = AddEffect("SmokeTrail", this, 1, 1, this);
+	fx.particles = 
+	{
+		Size = PV_KeyFrames(0, 0, 0, 100, PV_Random(2, 6), 1000, PV_Random(8, 10)),
+		Alpha = PV_Linear(128, 0),
+		ForceX = PV_Random(-1, 1, 10),
+		ForceY = PV_Random(-1, 1, 10),
+	};
+	fx.x = GetX();
+	fx.y = GetY();
 }
 
-func FxSmokeTrailTimer()
+func FxSmokeTrailTimer(object target, effect fx, int time)
 {
 	var xd = GetXDir(1), yd = GetYDir(1);
 	SetR(Angle(0, 0, xd, yd));
-	DrawLightningSmall(0, 0, -xd, -yd);
-	if(!Random(3))
-		DrawLightningSmall(0, 0, RandomX(-30, 30), RandomX(-30, 30));
+	DrawParticleLine("SmokeDirty", AbsX(fx.x), AbsY(fx.y), 0, 0, 1, 0, 0, PV_Random(5, 10), fx.particles);
+	fx.x = GetX();
+	fx.y = GetY();
 }
 
 func Hit(int x, int y)
@@ -83,21 +92,21 @@ func Hit(int x, int y)
 	
 	Sound("Hits::Materials::Metal::DullMetalHit*");
 	
-	for(var i = 0; i < 15; ++i)
-	{
-		var x2 = RandomX(-20, 20);
-		var y2 = RandomX(-20, 20);
-		if(GBackSolid(x2, y2)) continue;
-		
-		DrawLightning(0, 0, x2, y2);
-	}
+	var rx = 20 * vec[0];
+	var ry = 20 * vec[1];
+	CreateParticle("StarSpark", PV_Random(-1, 1), PV_Random(-1, 1), PV_Random(rx - 30, rx + 30), PV_Random(ry - 30, ry + 30), PV_Random(3, 10), Particles_Glimmer(), 50); 
 }
 
 func BlowUp()
 {
-	//var xd = GetXDir(100);
-	//var yd = GetYDir(100);
-	
+	var ray_particles = 
+	{
+		Size = 4,
+		Alpha = PV_KeyFrames(0, 0, 255, 500, 255, 1000, 0),
+		BlitMode = GFX_BLIT_Additive,
+		G = 200,
+		B = 100,
+	};
 	
 	var xd = 0, yd = 0;
 	var td = 20;
@@ -130,8 +139,11 @@ func BlowUp()
 		
 		var shrapnel = CreateObject(Shrapnel);
 		
-		AddEffect("RndLightning", shrapnel, 1, 1, nil, GetID(), GetX(), GetY());
-		//AddEffect("SmokeParticle", shrapnel, 1, 0, nil, GetID());
+		var fx = AddEffect("ShrapnelTrail", shrapnel, 1, 1, nil, GetID(), GetX(), GetY());
+		fx.particles = {Prototype = ray_particles, Rotation = a};
+		fx.x = GetX();
+		fx.y = GetY();
+		
 		shrapnel->SetController(GetController());
 		//shrapnel->SetSpeed(xd/2 + Random(xd/2), yd/2 + Random(yd/2), 100);
 		
@@ -152,27 +164,10 @@ func BlowUp()
 	RemoveObject();
 }
 
-func FxRndLightningStart(target, effect, temp, x, y)
+func FxShrapnelTrailTimer(object target, effect fx)
 {
-	if(temp)return;
-	effect.x = x;
-	effect.y = y;
-	effect.time = 1 + Random(10);
-}
+	target->DrawParticleLine("RaySpark", 0, 0, target->AbsX(fx.x), target->AbsY(fx.y), 1, 0, 0, 10, fx.particles);
+	fx.x = target->GetX();
+	fx.y = target->GetY();
+} 
 
-func FxRndLightningTimer(target, effect, time)
-{
-	DrawLightning(effect.x, effect.y, target->GetX(), target->GetY());
-	effect.x = target->GetX();
-	effect.y = target->GetY();
-	
-	if(time > effect.time) return -1;
-	return 1;
-}
-
-func FxRndLightningStop(target, effect, cause, temp)
-{
-	if(temp) return;
-	if(!target) return;
-	DrawLightning(effect.x, effect.y, target->GetX(), target->GetY());
-}
