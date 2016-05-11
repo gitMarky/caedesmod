@@ -1,6 +1,10 @@
 
 #appendto Clonk
 
+// Should be made nicer..
+func DoRoll() {}
+func DoKneel() {}
+
 func CreateMuzzleFlash(int x, int y, int angle, int size)
 {
 	// main muzzle flash
@@ -14,9 +18,13 @@ func CreateMuzzleFlash(int x, int y, int angle, int size)
 func Recruitment()
 {
 	this.ThrowSpeed *= 2;
+	this.JumpSpeed = 500;
 	
 	if(this.ActMap == this.Prototype.ActMap)
+	{
 		this.ActMap = {Prototype = this.Prototype.ActMap};
+		this.ActMap.Jump = {Prototype = this.ActMap.Jump};
+	}
 	this.ActMap["Hangle"] = nil;
 	this.ActMap["Scale"] = nil;
 	
