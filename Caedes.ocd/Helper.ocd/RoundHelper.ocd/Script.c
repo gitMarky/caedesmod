@@ -250,7 +250,8 @@ func NewRound()
 		
 		SetCursor(p, c);
 		
-		AddEffect("HoldPlayersInPlace", c, 1, Caedes_ShoppingTime, nil, RoundHelper);
+		var fx = AddEffect("HoldPlayersInPlace", c, 1, 1, nil, RoundHelper);
+		fx.max_time = Caedes_ShoppingTime;
 		
 		var obj;
 		for(var t = c->ContentsCount(); obj = c->Contents(--t);)
@@ -394,21 +395,17 @@ global func FxTickNewRoundStop(object target, proplist effect, reason, temp)
 		bar->Close();
 }
 
-func FxHoldPlayersInPlaceStart(target, effect, temp)
+func FxHoldPlayersInPlaceStart(target, fx, temp)
 {
 	if(temp) return;
-	target->PushActionSpeed("Walk", 0);
-	effect.jumpspeed = target.JumpSpeed;
-	target.JumpSpeed = 0;
+	fx.X = target->GetX();
 }
 
-func FxHoldPlayersInPlaceStop(target, effect, reason, temp)
+func FxHoldPlayersInPlaceTimer(target, fx, time)
 {
-	if(temp) return;
-	if(!target) return;
-	
-	target->PopActionSpeed("Walk");
-	target.JumpSpeed = effect.jumpspeed;
+	if (time > fx.max_time) return FX_Execute_Kill;
+	target->SetPosition(fx.X, target->GetY());
+	return FX_OK;
 }
 
 func FxDelayGoSoundTimer()
