@@ -85,26 +85,7 @@ Scale = {
 	StartCall = "StartScale",
 	AbortCall = "StopScale",
 },
-Tumble = {
-	Prototype = Action,
-	Name = "Tumble",
-	Procedure = DFA_FLIGHT,
-	Speed = 200,
-	Accel = 0,
-	Directions = 2,
-	Length = 1,
-	Delay = 0,
-	X = 0,
-	Y = 40,
-	Wdt = 8,
-	Hgt = 20,
-	NextAction = "Tumble",
-	ObjectDisabled = 1,
-	InLiquidAction = "Swim",
-	StartCall = "StartTumble",
-	AbortCall = "StopTumble",
-	EndCall = "CheckStuck",
-},
+Tumble = nil,
 Dig = {
 	Prototype = Action,
 	Name = "Dig",
@@ -339,6 +320,54 @@ Eat = {
 },
 };
 
+func Hit(int oldx, int oldy)
+{
+	if (IsJumping())
+	{
+		if (GetContact(-1, CNAT_Right))
+		{
+			SetXDir(-10);
+			SetYDir(oldy, 100);
+			AddEffect("CheckComDir", this, 1, 1, this);
+		}
+		else if (GetContact(-1, CNAT_Left))
+		{
+			SetXDir(10);
+			SetYDir(oldy, 100);
+			AddEffect("CheckComDir", this, 1, 1, this);
+		}
+		else if (GetContact(-1, CNAT_Top) && (oldy < 0))
+		{
+			SetXDir(oldx, 100);
+			SetYDir(+5);
+		}
+	}
+	
+	return inherited(oldx, oldy, ...);
+}
+
+func FxCheckComDirStart(target, fx, temp)
+{
+	if (temp) return;
+	SetComDir(COMD_None);
+}
+
+func FxCheckComDirTimer(target, fx, time)
+{
+	if (GetPlayerControlState(GetOwner(), CON_Left) && (GetComDir() != COMD_Left) && !GetContact(-1, CNAT_Left))
+	{
+		SetComDir(COMD_Left);
+		return -1;
+	}
+	if (GetPlayerControlState(GetOwner(), CON_Right) && (GetComDir() != COMD_Right) && !GetContact(-1, CNAT_Right))
+	{
+		SetComDir(COMD_Right);
+		return -1;
+	}
+}
+
+
+
 func StartJump()
 {
 	// Reset jump acceleration
@@ -353,7 +382,5 @@ func StartJump()
 func FxJumpingSpeedAdjustmentTimer()
 {
 	if (GetYDir() < 0) return FX_OK;
-	this.ActMap.Jump.Accel = 0;
-	this.ActMap.Jump.Decel = 0;
 	return FX_Execute_Kill;
 }
