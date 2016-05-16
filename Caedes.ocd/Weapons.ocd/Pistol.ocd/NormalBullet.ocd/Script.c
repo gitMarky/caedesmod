@@ -70,6 +70,7 @@ func FxTravelStart(object target, proplist fx, int temporary)
 	
 	fx.startx = GetX();
 	fx.starty = GetY();
+	fx.counter = 0;
 }
 
 func FxTravelTimer(object target, proplist fx, int time)
@@ -77,17 +78,20 @@ func FxTravelTimer(object target, proplist fx, int time)
 	var hit = false;
 	var objhit = false;
 	var erase = false;
+	
+	if (time > 5 && time%2==0)
+		fx.counter++;
 
 	var tx = GetX() + Sin(fx.a, speed, 100);
-	var ty = GetY() + -Cos(fx.a, speed, 100);
+	var ty = GetY() + -Cos(fx.a, speed, 100) + fx.counter;
 	
-	if(Distance(fx.startx, fx.starty, tx, ty) > fx.range)
+	/*if(Distance(fx.startx, fx.starty, tx, ty) > fx.range)
 	{
 		var curr = Distance(fx.startx, fx.starty, GetX(), GetY());
 		tx = GetX() + Sin(fx.a, fx.range - curr, 100);
 		ty = GetY() + -Cos(fx.a, fx.range - curr, 100);
 		erase = true;
-	}
+	}*/
 	
 	
 	var coords = PathFree2(GetX(), GetY(), tx, ty);
@@ -125,7 +129,7 @@ func FxTravelTimer(object target, proplist fx, int time)
 	SetPosition(tx, ty);
 	if(time)
 	{
-		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 10, fx.particle_ray);
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 5, fx.particle_ray);
 	}
 	
 	fx.ox = GetX();
