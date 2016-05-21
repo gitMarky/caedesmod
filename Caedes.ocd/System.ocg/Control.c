@@ -1,4 +1,6 @@
 
+static g_player_cursor_pos_ingame;
+
 global func Control2Player(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
 {
 	// cursor pos info - store in player values
@@ -11,6 +13,9 @@ global func Control2Player(int plr, int ctrl, int x, int y, int strength, bool r
 	
 	if(ctrl == CON_CaedesAimingCursor)
 	{
+		if (!g_player_cursor_pos_ingame) g_player_cursor_pos_ingame = CreateArray(plr+1);
+		g_player_cursor_pos_ingame[plr] = [x, y];
+		
 		var c = GetCursor(plr);
 		if(c)
 		{
@@ -98,6 +103,21 @@ global func Control2Player(int plr, int ctrl, int x, int y, int strength, bool r
 			return true;
 		}
 	}
+	
+	if (ctrl == CON_Grenade)
+	{
+		var cursor = GetCursor(plr);
+		if (cursor && (cursor->IsWalking() || cursor->IsJumping()))
+		{
+			var grenade = FindObject(Find_Container(cursor), Find_Or(Find_ID(IronBomb), Find_Func("IsGrenade")));
+			if (grenade && g_player_cursor_pos_ingame && g_player_cursor_pos_ingame[plr])
+			{
+				grenade->~ControlUse(cursor);
+				cursor->ControlThrow(grenade, g_player_cursor_pos_ingame[plr][0] - cursor->GetX(), g_player_cursor_pos_ingame[plr][1] - cursor->GetY());
+			}
+		}
+	}
+	
 	return inherited(plr, ctrl, x, y, strength, repeat, release);
 }
 
