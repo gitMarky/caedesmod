@@ -308,15 +308,12 @@ func FxFalconPunchStop(target, effect, reason, temp)
 	StopAnimation(effect.anim);
 }
 
-
-/* Main control function */
-/*
-public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
+func Hit()
 {
-	if (!this) 
-		return false;
-	return inherited(plr, ctrl, x, y, strength, repeat, release, ...);
-}*/
+	if (GetEffect("DoubleJumpCooldown", this))
+		RemoveEffect("DoubleJumpCooldown", this);
+	return inherited(...);
+}
 
 func IsAiming()
 {
