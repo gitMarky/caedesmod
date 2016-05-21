@@ -21,7 +21,7 @@ protected func Initialize()
 protected func Hit()
 {
 	Sound("Objects::Weapons::Musket::BulletHitGround?");
-	CreateImpactEffect(Max(5, damage*2/3));
+	CreateImpactEffect(Max(5, damage*2/3000));
 	RemoveObject();
 }
 
@@ -37,6 +37,7 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	from_ID = weapon;
 	user = shooter;
 	damage = dmg;
+	if (damage <= 100) damage *= 1000;
 	deviation = dev;
 	bulletRange = range;
 	
@@ -183,7 +184,7 @@ public func HitObject(object obj, bool no_remove)
 		this.crit = true;
 	}
 	
-	DoDmg(damage, nil, obj, nil, nil, this, from_ID);
+	DoDmg(damage, nil, obj, 1, nil, this, from_ID);
 	if(this.crit == true)
 	{
 		CreateCriticalHitMark(GetX(), GetY(), -1);

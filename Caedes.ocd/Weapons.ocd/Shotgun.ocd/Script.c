@@ -24,7 +24,7 @@ local weapon_properties =
 	//spread_decrease = 30,
 	
 	bullet_id = NormalBullet,
-	damage = 2,
+	damage = 2500,
 	range = 120,
 	
 	bullet_distance = 10,
