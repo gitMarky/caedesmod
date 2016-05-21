@@ -246,6 +246,7 @@ func NewRound()
 		
 		var pos = GetPlayerRespawnPosition(p);
 		c->SetPosition(pos.x, pos.y);
+		c.MaxEnergy = 100 * 1000;
 		c->DoEnergy(100);
 		
 		SetCursor(p, c);
@@ -281,7 +282,15 @@ func NewRound()
 	// if bombing goal, place bomb
 	if(ObjectCount(Find_ID(Goal_Destruction)))
 	{
-		Caedes_BombingTeam = 3 - Caedes_BombingTeam;
+		var bombing_team = Scenario->~GetBombingTeam();
+		if (bombing_team == nil)
+		{
+			Caedes_BombingTeam = 3 - Caedes_BombingTeam;
+		}
+		else
+		{
+			Caedes_BombingTeam = bombing_team;
+		}
 		
 		// find random player of team
 		var pos = GetTeamSpawnPosition(Caedes_BombingTeam);
