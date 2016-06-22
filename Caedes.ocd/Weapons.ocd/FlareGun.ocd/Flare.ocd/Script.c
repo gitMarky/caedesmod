@@ -126,7 +126,7 @@ func FxSmokeTrailTimer(target, effect, time)
 
 func Hit(int x, int y)
 {
-	Sound("GeneralHit?");
+	Sound("Hits::GeneralHit?");
 	
 	if(remaining_time - GetActTime() < 20)
 	{

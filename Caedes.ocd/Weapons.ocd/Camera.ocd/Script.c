@@ -59,7 +59,8 @@ func Hit()
 	AddTimer("Animation", 60);
 	
 	SetOwner(GetController());
-	AddViewPoint();
+	//AddViewPoint();
+	SetLightRange(200, 10);
 	MakeDefusable(35*1, GetPlayerTeam(GetController()));
 }
 

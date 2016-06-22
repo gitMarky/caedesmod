@@ -56,7 +56,7 @@ local iBarrel;
 
 func FireSound()
 {
-	Sound("Inflame");
+	Sound("Fire::Inflame");
 }
 
 func FireEffect(clonk, angle, off_x, off_y)

@@ -14,47 +14,15 @@ local instant;
 
 protected func Initialize()
 {
-	speed = 4000;
+	speed = 25;
+	SetAction("Travel");
 }
 
 protected func Hit()
 {
-	var self = this;
-	
-	if(!instant)
-	{
-		SetXDir(0);
-		SetYDir(0);
-	
-		if(nextX)
-		{
-			var x = GetX(), y = GetY();
-			var a = Angle(lastX, lastY, nextX, nextY);
-			var max = Max(Abs(GetXDir()/10),AbsY(GetYDir()/10));
-			for(var cnt = 0; cnt < max; cnt += 2)
-			{
-				nextX = Sin(a, cnt);
-				nextY = -Cos(a, cnt);
-				if(GBackSolid(lastX + nextX - x, lastY + nextY - y))
-				{
-					SetPosition(lastX + nextX, lastY + nextY);
-					if(trail)
-						trail->Traveling();
-					break;
-				}
-			}
-		}
-			
-		DoHitCheckCall();
-	}
-	
-	if(self)
-	{
-		Sound("BulletHitGround?");
-		CreateImpactEffect(Max(5, damage*2/3));
-	  	
-	  	RemoveObject();
-	}
+	Sound("Objects::Weapons::Musket::BulletHitGround?");
+	CreateImpactEffect(Max(5, damage*2/3000));
+	RemoveObject();
 }
 
 func Remove()
@@ -69,6 +37,7 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	from_ID = weapon;
 	user = shooter;
 	damage = dmg;
+	if (damage <= 100) damage *= 1000;
 	deviation = dev;
 	bulletRange = range;
 	
@@ -79,64 +48,110 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	angle *= 100;
 	angle += RandomX(-deviation, deviation);
 	
-	// set position to final point
-	var x_p = GetX();
-	var y_p = GetY();
+	var fx = AddEffect("Travel", this, 1, 1, this);
+	fx.a = angle;
+	fx.range = range;
+	fx.dmg = dmg;
+	fx.shooter = shooter;
+	fx.particle_ray = 
+		{
+			Size = 6,
+			Alpha = PV_KeyFrames(0, 0, 255, 500, 255, 1000, 0),
+			BlitMode = GFX_BLIT_Additive,
+			Rotation = fx.a / 100,
+			G = 200,
+			B = 100,
+		};
+}
+
+func FxTravelStart(object target, proplist fx, int temporary)
+{
+	fx.ox = GetX();
+	fx.oy = GetY();
 	
-	var t_x = GetX() + Sin(angle, bulletRange, 100);
-	var t_y = GetY() - Cos(angle, bulletRange, 100);
+	fx.startx = GetX();
+	fx.starty = GetY();
+	fx.counter = 0;
+}
+
+func FxTravelTimer(object target, proplist fx, int time)
+{
+	var hit = false;
+	var objhit = false;
+	var erase = false;
 	
-	var coords = PathFree2(x_p, y_p, t_x, t_y);
+	if (time > 5 && time%2==0)
+		fx.counter++;
+
+	var tx = GetX() + Sin(fx.a, speed, 100);
+	var ty = GetY() + -Cos(fx.a, speed, 100) + fx.counter;
 	
-	if(!coords) // path is free
-		SetPosition(t_x, t_y);
-	else SetPosition(coords[0], coords[1]);
-		
-	// we are at the end position now, check targets
-	var hit_object = false;
-	for (obj in FindObjects(
-								Find_OnLine(x_p - GetX(), y_p - GetY(), 0, 0),
+	/*if(Distance(fx.startx, fx.starty, tx, ty) > fx.range)
+	{
+		var curr = Distance(fx.startx, fx.starty, GetX(), GetY());
+		tx = GetX() + Sin(fx.a, fx.range - curr, 100);
+		ty = GetY() + -Cos(fx.a, fx.range - curr, 100);
+		erase = true;
+	}*/
+	
+	
+	var coords = PathFree2(GetX(), GetY(), tx, ty);
+
+	
+	if(coords)
+	{
+		tx = coords[0];
+		ty = coords[1];
+		hit = true;
+	}
+	
+	for (var obj in FindObjects(
+								Find_OnLine(tx - GetX(), ty - GetY(), 0, 0),
 								Find_NoContainer(),
-								//Find_Layer(GetObjectLayer()),
-								//Find_PathFree(target),
-								Find_Exclude(shooter),
-								Sort_Distance(x_p - GetX(), y_p - GetY())
+								Find_Exclude(fx.shooter),
+								Sort_Distance(tx - GetX(), ty - GetY())
 							))
 	{
-		if (obj->~IsProjectileTarget(this, shooter) || obj->GetOCF() & OCF_Alive)
+		if(obj->~IsProjectileInteractionTarget())
 		{
-			var objdist = Distance(x_p, y_p, obj->GetX(), obj->GetY());
-			SetPosition(x_p + Sin(angle, objdist, 100), y_p - Cos(angle, objdist, 100));
-			var self = this;
+			obj->~OnProjectileInteraction(tx, ty, fx.a, fx.shooter, fx.dmg);
+		}
+		
+		if (!objhit && (obj->~IsProjectileTarget(this, fx.shooter) || obj->GetOCF() & OCF_Alive))
+		{
+			var objdist = Distance(tx, ty, obj->GetX(), obj->GetY());
+			SetPosition(tx + Sin(fx.a, objdist, 100), ty - Cos(fx.a, objdist, 100));
 			HitObject(obj, true);
-			hit_object = true;
-			break;
+			objhit=true;
 		}
 	}
 	
-	// at end position now
-	for(var obj in FindObjects(Find_OnLine(x_p - GetX(), y_p - GetY()), Find_Func("IsProjectileInteractionTarget")))
+	
+	SetPosition(tx, ty);
+	if(time)
 	{
-		obj->~OnProjectileInteraction(x_p, y_p, angle, shooter, damage);
+		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 5, fx.particle_ray);
 	}
 	
-	if(!shooter.silencer)
+	fx.ox = GetX();
+	fx.oy = GetY();
+	
+	if(hit)
 	{
-		var t = CreateObject(Bullet_TrailEffect, 0, 0, NO_OWNER);
-		t->Point({x = x_p, y = y_p}, {x = GetX(), y = GetY()});
-		t->FadeOut();
-		t->SetObjectBlitMode(GFX_BLIT_Additive);
+		Hit();
+		return -1;
 	}
 	
-	var self = this;
-	if(!hit_object)
+	if(erase)
 	{
-		var hit = GBackSolid(Sin(angle, 2, 100), -Cos(angle, 2, 100));
-		
-		if(hit)
-			Hit();
+		RemoveObject();
+		return -1;
 	}
-	if(self) RemoveObject();
+}
+
+func FxTravelStop(object target, proplist fx, int reason, bool temporary)
+{
+
 }
 
 func CreateTrail()
@@ -169,7 +184,7 @@ public func HitObject(object obj, bool no_remove)
 		this.crit = true;
 	}
 	
-	DoDmg(damage, nil, obj, nil, nil, this, from_ID);
+	DoDmg(damage, nil, obj, 1, nil, this, from_ID);
 	if(this.crit == true)
 	{
 		CreateCriticalHitMark(GetX(), GetY(), -1);
@@ -184,9 +199,9 @@ public func HitObject(object obj, bool no_remove)
 public func OnStrike(object obj)
 {
 	if(obj->GetAlive())
-		Sound("ProjectileHitLiving?");
+		Sound("Hits::ProjectileHitLiving?");
 	else
-		Sound("BulletHitGround?");
+		Sound("Objects::Weapons::Musket::BulletHitGround?");
 }
 
 

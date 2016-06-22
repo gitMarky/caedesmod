@@ -1,3 +1,2 @@
-Name=Raketenwerfer
-Description=Boom!
-UsageHelp=Aim and launch!
+Name=RPG
+Description=One time use. Fires a rocket.

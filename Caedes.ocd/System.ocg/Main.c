@@ -42,7 +42,7 @@ global func InitCaedes()
 	
 	Caedes_BombingTeam = 1 + Random(2);
 	
-	AddEffect("GlobalVisibilityCheck", 0, 1, 15, 0);
+	//AddEffect("GlobalVisibilityCheck", 0, 1, 15, 0);
 	if(!ObjectCount(Find_ID(CallbackRule)))
 		CreateObject(CallbackRule);
 
@@ -53,6 +53,7 @@ global func InitCaedes()
 	StopGameCounter(true); // create game counter, stopped
 	
 	Caedes_ViewPoints = [];
+	SetAmbientBrightness(0);
 	
 	Scoreboard->Init(
 		[
@@ -87,7 +88,7 @@ global func DoPlrScore(int plr, int amount)
 	Caedes_player_round_score[plr] += amount;
 	
 	CaedesDoWealth(plr, amount);
-	Sound("Cash", false, 50, plr);
+	Sound("UI::Cash", false, 50, plr);
 	Caedes_player_score[plr] += amount;
 	Scoreboard->SetPlayerData(plr, "score", Format("<c 999955>%d</c>", Caedes_player_score[plr]), Caedes_player_score[plr]);
 	

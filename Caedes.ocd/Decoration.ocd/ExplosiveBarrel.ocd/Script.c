@@ -28,7 +28,7 @@ func OnHit(dmg, type, from, weapon)
 func BlowUp()
 {
 	ExplosionEffect(20);
-	Sound("Blast3");
+	Sound("Fire::Blast3");
 	for(var obj in FindObjects(Find_Distance(30), Find_OCF(OCF_Alive), Find_NoContainer(), Find_PathFree(this)))
 	{
 		DoDmg(30 - ObjectDistance(this, obj), nil, obj, nil, nil, nil, GetID());

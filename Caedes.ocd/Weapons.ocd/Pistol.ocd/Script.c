@@ -14,7 +14,7 @@ func TitleDef(){return Pistol_Title;}
 public func IsArmoryProduct() { return true; }
 
 func Definition(def) {
-	SetProperty("PictureTransformation", Trans_Mul(Trans_Scale(2000, 2000, 2000), Trans_Translate(0000, 3000, 000), Trans_Rotate(270, 0, 0, 1), Trans_Rotate(270, 1 ,0, 0)), def);
+	def.PictureTransformation = Trans_Mul(Trans_Scale(1500, 1500, 1500), Trans_Translate(4000, -1500, 0), Trans_Rotate(270, 0, 1, 0), Trans_Rotate(-50, 1 ,0, 0));
 }
 
 local Name = "$Name$";
@@ -28,7 +28,7 @@ local rounds;
 
 func Hit()
 {
-	Sound("GeneralHit?");
+	Sound("Hits::GeneralHit?");
 }
 
 local fAiming;	
@@ -39,7 +39,7 @@ public func GetCarrySpecial(clonk) { if(fAiming > 0) return "pos_hand2"; }
 public func GetCarryBone()	{	return	"main";	}
 public func GetCarryTransform()
 {
-	return Trans_Rotate(-90, 0, 1, 0);
+	return Trans_Mul(Trans_Rotate(-90, 0, 1, 0), Trans_Rotate(90, 1, 0, 0));
 }
 
 local animation_set;
@@ -47,14 +47,14 @@ local animation_set;
 local weapon_properties =
 {
 	max_ammo = 50,
-	clip = 10,
-	recharge = 10,
+	clip = 8,
+	recharge = 20,
 	
 	spread = 1,
 	spread_factor = 100,
 	
 	bullet_id = NormalBullet,
-	damage = 15,
+	damage = 10,
 	range = 160,
 	
 	bullet_distance = 10,
@@ -230,7 +230,7 @@ func FxIsLoadingTimer(target, effect, time)
 	if(time >= effect.max)
 	{
 		FinishReload();
-		Sound("Click");
+		Sound("UI::Click");
 		return -1;
 	}
 	return 1;
@@ -247,7 +247,7 @@ func FinishReload()
 
 func FireSound()
 {
-	Sound("GunShoot*");
+	SoundAt("Objects::Weapons::Musket::GunShoot*");
 }
 
 func TryFire(clonk, angle)
@@ -284,6 +284,7 @@ func Fire(clonk, angle)
 	{
 		FireSound();
 		FireEffect(clonk, angle, x, y);
+		FireScreenshake(clonk);
 	}
 	FireShot(clonk, angle, x, y, range);
 	
@@ -373,6 +374,11 @@ func FireEffect(clonk, angle, off_x, off_y)
 {
 	clonk->CreateMuzzleFlash(off_x, off_y, angle, 10);
 	CreateCartridgeEffect(6, Sin(-angle, 10), -RandomX(6, 12));
+}
+
+func FireScreenshake(clonk)
+{
+	ShakeViewport(10, 0, 0, 10);
 }
 
 func AddDeviation()

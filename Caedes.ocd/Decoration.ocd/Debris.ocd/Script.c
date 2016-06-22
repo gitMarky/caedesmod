@@ -44,8 +44,8 @@ func FxRemoveMeTimer(target, effect, time)
 func Hit()
 {
 	CreateParticle("SmokeDirty", 0, 0, PV_Random(-20, 20), PV_Random(-20, 20), PV_Random(10, 60), Particles_Glimmer(), 40);
-	Sound("RockHit?", nil, 50);
+	Sound("Hits::Materials::Rock::RockHit?", nil, 50);
 	if(GetActTime() < 40) return;
-	Sound("LightMetalHit?", nil, 20);
+	Sound("Hits::Materials::Metal::LightMetalHit?", nil, 20);
 	RemoveObject();
 }

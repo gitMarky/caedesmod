@@ -1,3 +1,2 @@
 Name=Rifle
 Description=Low fire rate, high range and accuracy.|Ammo: 3/9
-UsageHelp=Aim and shoot with [Use]. The musket needs lead shots as ammunition.

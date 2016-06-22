@@ -1,2 +1,2 @@
-Name=Camera
-Description=Makes close enemies visible.
+Name=Kamera
+Description=Macht nahe Gegner sichtbar.

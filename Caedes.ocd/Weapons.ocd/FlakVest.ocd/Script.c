@@ -56,7 +56,7 @@ func FxWearsFlakVestDamage(target, effect, dmg, cause)
 	// prevent shot!
 	
 	if(!Random(10))
-		target->Sound("LightMetalHit*");
+		target->Sound("Hits::Materials::Metal::LightMetalHit*");
 	
 	// weaken damage
 	if(dmg < -1000)
@@ -70,7 +70,7 @@ func FxWearsFlakVestDamage(target, effect, dmg, cause)
 	if(effect.damage_taken > FlakVest_MaxDamage)
 	{
 		RemoveEffect(nil, target, effect);
-		Sound("Clonk");
+		Sound("Objects::Clonk");
 	}
 	return dmg;
 }

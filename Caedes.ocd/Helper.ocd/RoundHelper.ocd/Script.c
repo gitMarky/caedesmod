@@ -8,7 +8,7 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-static const CAEDES_ViewRange = 400;
+static const CAEDES_ViewRange = 600;
 
 static Caedes_Halftime_announced;
 static Caedes_LastRound_announced;
@@ -184,6 +184,7 @@ func InitPlayer(plr, old)
 	
 	var clnk = GetCrew(plr);
 	if(!clnk) {Log("Init player with no valid Clonk called"); return;} // wat
+	clnk->SetLightRange(400, 10);
 	ApplyPerks(plr);
 	
 	// TODO: replace with respawn container!
@@ -235,6 +236,17 @@ func TeamWonRound(int team)
 	Z4PlayersWonRound(players_winlose[0], players_winlose[1]);
 }
 
+		c.MaxEnergy = 100 * 1000;
+		AddEffect("HoldPlayersInPlace", c, 1, Caedes_ShoppingTime, nil, RoundHelper);
+		fx.max_time = Caedes_ShoppingTime;
+		var bombing_team = Scenario->~GetBombingTeam();
+		if (bombing_team == nil)
+		{
+		}
+		else
+		{
+			Caedes_BombingTeam = bombing_team;
+		}
 protected func FxCheckNextRoundEffect(string new_name, object target, proplist effect, var1, var2, var3, var4)
 {
 	if(new_name == "CheckNextRound") return -1;
@@ -331,21 +343,17 @@ protected func FxTickNewRoundStop(object target, proplist effect, reason, temp)
 		bar->Close();
 }
 
-func FxHoldPlayersInPlaceStart(target, effect, temp)
+func FxHoldPlayersInPlaceStart(target, fx, temp)
 {
 	if(temp) return;
-	target->PushActionSpeed("Walk", 0);
-	effect.jumpspeed = target.JumpSpeed;
-	target.JumpSpeed = 0;
+	fx.X = target->GetX();
 }
 
-func FxHoldPlayersInPlaceStop(target, effect, reason, temp)
+func FxHoldPlayersInPlaceTimer(target, fx, time)
 {
-	if(temp) return;
-	if(!target) return;
-	
-	target->PopActionSpeed("Walk");
-	target.JumpSpeed = effect.jumpspeed;
+	if (time > fx.max_time) return FX_Execute_Kill;
+	target->SetPosition(fx.X, target->GetY());
+	return FX_OK;
 }
 
 func FxDelayGoSoundTimer()

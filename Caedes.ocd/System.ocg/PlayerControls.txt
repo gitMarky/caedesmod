@@ -4,12 +4,15 @@
 	Identifier=Backpack
 	GUIName=Backpack
 	GUIDesc=Open/close backpack
-	SendCursorPos=1
+	
+	[ControlDef]
+	Identifier=Grenade
+	GUIName=Grenade
+	GUIDesc=Throw grenade
 	
 	[ControlDef]
 	Identifier=CaedesAimingCursor
 	DefaultDisabled=1
-	SendCursorPos=1
 	
 [ControlSets]
 
@@ -23,7 +26,10 @@
 		[Assignment]
 		Key=Q
 		Control=Backpack
-		Group=1
+		
+		[Assignment]
+		Key=C
+		Control=Grenade
 		
 		[Assignment]
 		Key=Mouse1Move

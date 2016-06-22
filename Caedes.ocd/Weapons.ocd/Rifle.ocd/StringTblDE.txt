@@ -1,3 +1,2 @@
 Name=Gewehr
 Description=Niedrige Schussrate, hohe Reichweite und Genauigkeit.|Ammo: 3/9
-UsageHelp=Ziele und schieße mit [Benutzen]. Die Muskete benötigt Bleikugeln als Munition.

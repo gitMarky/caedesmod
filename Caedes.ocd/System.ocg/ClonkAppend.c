@@ -1,6 +1,10 @@
 
 #appendto Clonk
 
+// Should be made nicer..
+func DoRoll() {}
+func DoKneel() {}
+
 func CreateMuzzleFlash(int x, int y, int angle, int size)
 {
 	// main muzzle flash
@@ -14,9 +18,13 @@ func CreateMuzzleFlash(int x, int y, int angle, int size)
 func Recruitment()
 {
 	this.ThrowSpeed *= 2;
+	this.JumpSpeed = 500;
 	
 	if(this.ActMap == this.Prototype.ActMap)
+	{
 		this.ActMap = {Prototype = this.Prototype.ActMap};
+		this.ActMap.Jump = {Prototype = this.ActMap.Jump};
+	}
 	this.ActMap["Hangle"] = nil;
 	this.ActMap["Scale"] = nil;
 	
@@ -79,7 +87,7 @@ func FxOverallDamageStuffDamage(pTarget, iEffectNumber, iDmgEngy, iCause, iBy)
 				
 				if(!obj->~NoRemove())
 				{
-					AddEffect("ScheduledRemove", obj, 1, 1, 0, Clonk, pTarget);
+					AddEffect("ScheduledRemove", obj, 1, 1, nil, Clonk, pTarget);
 					pTarget.kill_bounty += Max(1, (obj->GetValue() / 5)) * 2;
 				}
 			}
@@ -105,6 +113,27 @@ func FxOverallDamageStuffDamage(pTarget, iEffectNumber, iDmgEngy, iCause, iBy)
 				{
 					Caedes_player_round_damage[iBy] += Min(-iDmgEngy, pTarget->GetEnergy() * 1000);
 				}
+			
+			// You see the damage you deal to enemies.
+			if (iBy != NO_OWNER)
+			{
+				var helper = FindObject(Find_ID(FloatingMessage), Find_Owner(iBy), Find_ActionTarget(this));
+				if (!helper)
+				{
+					helper = CreateObject(FloatingMessage, nil, -5, iBy);
+					helper.Visibility = VIS_Owner;
+					helper.damage = 0;
+					helper->SetAction(helper->GetAction(), this, nil, true);
+					helper->FadeOut(1, 3);
+					helper->SetYDir(-1);
+				}
+				helper.damage += -iDmgEngy;
+				helper.alpha = 255;
+				helper->SetPosition(GetX(), GetY() - 5);
+				helper->SetMessage(Format("-%d", helper.damage / 1000));
+				var clr = BoundBy(helper.damage / 100, 0, 255);
+				helper->SetColor(clr, 255 - clr, 0);
+			}
 		}
 	}
 
@@ -149,6 +178,7 @@ func Death()
 {
 	var e = AddEffect("FadeOut", this, 1, 2, this);
 	e.fade_speed = 20;
+	CastObjects(Flesh, 8, 50);
 	return _inherited(...);
 }
 
@@ -263,7 +293,7 @@ func FxFalconPunchTimer(target, effect, time)
 			{
 				DoDmg(100, nil, obj, nil, nil, this, Clonk);
 			}
-			Sound("Hurt*");
+			Sound("Clonk::Verbal::Hurt*");
 			effect.Interval = 1;
 			return 1;
 		}
@@ -278,15 +308,12 @@ func FxFalconPunchStop(target, effect, reason, temp)
 	StopAnimation(effect.anim);
 }
 
-
-/* Main control function */
-/*
-public func ObjectControl(int plr, int ctrl, int x, int y, int strength, bool repeat, bool release)
+func Hit()
 {
-	if (!this) 
-		return false;
-	return inherited(plr, ctrl, x, y, strength, repeat, release, ...);
-}*/
+	if (GetEffect("DoubleJumpCooldown", this))
+		RemoveEffect("DoubleJumpCooldown", this);
+	return inherited(...);
+}
 
 func IsAiming()
 {

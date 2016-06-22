@@ -60,7 +60,7 @@ func FxMRotateTimer(target, effect, time)
 
 func Hit()
 {
-	Sound("Clonk");
+	Sound("Objects::Clonk");
 }
 
 func Interact(object clonk)
@@ -133,7 +133,7 @@ func Exec()
 			AddEffect("BlowUpTimer", this, 1, 5, this);
 			RemoveTimer("Check");
 			MakeDefusable(BigBomb_MaxCounter_Defuse, team);
-			Sound("Fuse");
+			Sound("Fire::Fuse");
 		}
 		else
 		{
@@ -259,7 +259,7 @@ func OnDefused(obj)
 {	
 	if(obj) DoPlrScore(obj->GetOwner(), 15);
 	Schedule(this, "Smoke(0, 0, 5)", 1, 30);
-	Sound("Click");
+	Sound("UI::Click");
 	CaedesBombExploded(false);
 	RemoveEffect("BlowUpTimer", this);
 	return true;

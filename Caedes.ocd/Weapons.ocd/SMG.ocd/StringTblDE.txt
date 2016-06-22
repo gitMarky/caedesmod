@@ -1,3 +1,2 @@
 Name=SMG
 Description=Hohe Schussrate, niedrige Genauigkeit.|Ammo: 25/100
-UsageHelp=Ziele und schieße mit [Benutzen]. Die Muskete benötigt Bleikugeln als Munition.

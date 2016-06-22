@@ -8,7 +8,7 @@ public func GetCarrySpecial(clonk) { if(fAiming > 0) return "pos_hand2"; }
 public func GetCarryBone()	{	return	"main";	}
 public func GetCarryTransform()
 {
-	return Trans_Rotate(-90, 0, 1, 0);
+	return Trans_Mul(Trans_Translate(-10000, 0, 1000), Trans_Rotate(-90, 0, 1, 0), Trans_Rotate(90, 1, 0, 0));
 }
 
 local animation_set;
@@ -16,15 +16,15 @@ local animation_set;
 local weapon_properties =
 {
 	max_ammo = 100,
-	clip = 50,
-	recharge = 3,
+	clip = 5,
+	recharge = 1,
 	
-	spread = 600,
+	spread = 300,
 	spread_factor = 200,
 	//spread_decrease = 50,
 	
 	bullet_id = NormalBullet,
-	damage = 3,
+	damage = 6,
 	range = 200,
 	
 	bullet_distance = 10,
@@ -46,7 +46,7 @@ func Initialize()
 		AimMode        = AIM_Position, // The aiming animation is done by adjusting the animation position to fit the angle
 		AnimationAim   = "MusketAimArms",
 		AnimationLoad  = "MusketLoadArms",
-		LoadTime       = 80,
+		LoadTime       = 40,
 		AnimationShoot = nil,
 		ShootTime      = 20,
 		WalkSpeed      = nil,
@@ -58,13 +58,18 @@ local iBarrel;
 
 func FireSound()
 {
-	Sound("SMG1", nil, 50);
+	SoundAt("SMG1", 0, 0, 50);
 }
 
 func FireEffect(clonk, angle, off_x, off_y)
 {
 	clonk->CreateMuzzleFlash(off_x, off_y, angle, 5);
 	CreateCartridgeEffect(3, -Sin(angle,500)/80, -RandomX(6,12));
+}
+
+func FireScreenshake(clonk)
+{
+	ShakeViewport(5, 0, 0, 10);
 }
 
 func Definition(def) {
