@@ -8,7 +8,7 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-static const CAEDES_ViewRange = 400;
+static const CAEDES_ViewRange = 600;
 
 static Caedes_Halftime_announced;
 static Caedes_LastRound_announced;
@@ -106,6 +106,7 @@ func InitPlayer(plr, old)
 	
 	var clnk = GetCrew(plr);
 	if(!clnk) {Log("Init player with no valid Clonk called"); return;} // wat
+	clnk->SetLightRange(400, 10);
 	ApplyPerks(plr);
 	var obj = CreateObject(RoundHelper, x - GetX(), y - GetX());
 	clnk->Enter(obj);
@@ -245,11 +246,13 @@ func NewRound()
 		
 		var pos = GetPlayerRespawnPosition(p);
 		c->SetPosition(pos.x, pos.y);
+		c.MaxEnergy = 100 * 1000;
 		c->DoEnergy(100);
 		
 		SetCursor(p, c);
 		
-		AddEffect("HoldPlayersInPlace", c, 1, Caedes_ShoppingTime, nil, RoundHelper);
+		var fx = AddEffect("HoldPlayersInPlace", c, 1, 1, nil, RoundHelper);
+		fx.max_time = Caedes_ShoppingTime;
 		
 		var obj;
 		for(var t = c->ContentsCount(); obj = c->Contents(--t);)
@@ -279,7 +282,15 @@ func NewRound()
 	// if bombing goal, place bomb
 	if(ObjectCount(Find_ID(Goal_Destruction)))
 	{
-		Caedes_BombingTeam = 3 - Caedes_BombingTeam;
+		var bombing_team = Scenario->~GetBombingTeam();
+		if (bombing_team == nil)
+		{
+			Caedes_BombingTeam = 3 - Caedes_BombingTeam;
+		}
+		else
+		{
+			Caedes_BombingTeam = bombing_team;
+		}
 		
 		// find random player of team
 		var pos = GetTeamSpawnPosition(Caedes_BombingTeam);
@@ -393,21 +404,17 @@ global func FxTickNewRoundStop(object target, proplist effect, reason, temp)
 		bar->Close();
 }
 
-func FxHoldPlayersInPlaceStart(target, effect, temp)
+func FxHoldPlayersInPlaceStart(target, fx, temp)
 {
 	if(temp) return;
-	target->PushActionSpeed("Walk", 0);
-	effect.jumpspeed = target.JumpSpeed;
-	target.JumpSpeed = 0;
+	fx.X = target->GetX();
 }
 
-func FxHoldPlayersInPlaceStop(target, effect, reason, temp)
+func FxHoldPlayersInPlaceTimer(target, fx, time)
 {
-	if(temp) return;
-	if(!target) return;
-	
-	target->PopActionSpeed("Walk");
-	target.JumpSpeed = effect.jumpspeed;
+	if (time > fx.max_time) return FX_Execute_Kill;
+	target->SetPosition(fx.X, target->GetY());
+	return FX_OK;
 }
 
 func FxDelayGoSoundTimer()

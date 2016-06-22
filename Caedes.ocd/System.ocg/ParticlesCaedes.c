@@ -16,11 +16,36 @@ global func Particles_Blood(int size, int rotation)
 	};
 }
 
+static Caedes_ImpactParticles_Sparks;
+static Caedes_ImpactParticles_Debris;
+
 global func CreateImpactEffect(int size, int xoff, int yoff)
 {
-	var particles = Particles_Glimmer();
-	particles.Phase = PV_Random(0, 4);
-	CreateParticle("Frazzle", PV_Random(xoff - 2, xoff + 2), PV_Random(yoff - 2, yoff + 2), PV_Random(-size, size), PV_Random(-size, size), PV_Random(20, 40), particles, size * 2);
+	if (!Caedes_ImpactParticles_Sparks)
+	{
+		Caedes_ImpactParticles_Sparks = 
+		{
+			Size = PV_Linear(2, 0),
+		    ForceY = 2,
+			Stretch = PV_Linear(10000, 0),
+			Rotation = PV_Random(0, 360),
+		    R = 255,
+		    G = PV_Linear(255, 100),
+		    B = PV_Random(0, 255, 2),
+			BlitMode = GFX_BLIT_Additive,
+			Phase = PV_Random(0, 4)
+		};
+		
+		Caedes_ImpactParticles_Debris =
+		{
+			Prototype = Particles_Material(RGB(255, 200, 100)),
+			Size = PV_Linear(PV_Random(0, 2), 0),
+			Stretch = PV_Speed(500, 1000),
+		};
+	}
+	
+	CreateParticle("Frazzle", 0, 0, 0, 0, PV_Random(1, 10), Caedes_ImpactParticles_Sparks, size * 4);
+	CreateParticle("SmokeDirty", PV_Random(-2, 2), PV_Random(-2, 2), PV_Random(-size * 2, size * 2), PV_Random(-size * 2, size * 2), PV_Random(10, 40), Caedes_ImpactParticles_Debris, size);
 }
 
 global func CreateCartridgeEffect(int size, int xdir, int ydir)

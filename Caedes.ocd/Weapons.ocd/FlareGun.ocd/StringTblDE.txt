@@ -1,3 +1,2 @@
-Name=Granatenwerfer
-Description=Schießt abprallende Granaten.|Ammo: 1/5
-UsageHelp=Ziele und schieße mit [Benutzen].
+Name=Flare
+Description=Die Projektile markieren den Gegner und erhöhen seinen genommenen Schaden.

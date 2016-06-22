@@ -1,0 +1,21 @@
+material Sniper 
+{
+    receive_shadows on
+    technique
+    {
+        pass
+        {
+            ambient 0.8 0.8 0.8 1.0
+            diffuse 0.8 0.8 0.8 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            texture_unit 
+            {
+                texture Sniper_UV_Bake.jpg
+                tex_address_mode wrap
+                filtering trilinear
+            }
+        }
+    }
+}

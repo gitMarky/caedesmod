@@ -28,7 +28,7 @@ func Check()
 	var obj;
 	if(obj = FindObject(Find_AtRect(20, -200, 300, 400), Find_OCF(OCF_Alive), Find_ID(Clonk)))
 	{
-		obj->Sound("Hurt*");
+		obj->Sound("Clonk::Verbal::Hurt*");
 		obj->Fling(-2, -2);
 		obj->SetSpeed(-30, -20);
 	}

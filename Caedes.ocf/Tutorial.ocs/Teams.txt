@@ -1,5 +1,4 @@
 [Teams]
-FreeForAll=false
 AllowTeamSwitch=false
 AllowHostilityChange=false
 TeamColors=true

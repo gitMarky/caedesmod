@@ -43,24 +43,27 @@ func MakeMenu(string what, int priority)
 	var menu =
 	{
 		Priority = priority,
-		Margin = 5,
 		BackgroundColor = RGBa(0, 0, 0, 200),
 		Style = GUI_FitChildren,
 		titlebar = 
 		{
-			Bottom = "1em",
+			Bottom = "1.25em",
 			Symbol = 0,
-			Text = Format("<c %x>%s</c>", purple, text),
+			text = 
+			{
+				Left = "1em",
+				Text = Format("<c %x>%s</c>", purple, text)
+			},
 			bottomline = 
 			{
-				Top = "100% - 0.5em",
+				Top = "100% - 0.1em",
 				BackgroundColor = purple
 			}
 		},
 		contents =
 		{
 			Style = GUI_GridLayout | GUI_FitChildren,
-			Top = "1.25em", Left = "0.5em", Bottom = "100% - 0.5em", Right = "100% - 0.5em"
+			Top = "1.5em", Left = "0.5em", Bottom = "100% - 0.5em", Right = "100% - 0.5em"
 		}
 	};
 	
@@ -79,7 +82,6 @@ func MakeMenu(string what, int priority)
 		++counter;
 		
 		// prepare desc graphics
-		var dummy = CreateContents(Dummy);
 		var desc_ID = nil;//GUI_CaedesTextContainer;
 		var desc = obj->~GetDescID();
 		if (GetType(desc) == C4V_Def)
@@ -87,8 +89,7 @@ func MakeMenu(string what, int priority)
 			desc_ID = desc;
 			desc = "Info";
 		}
-		dummy->SetGraphics(desc, desc_ID, 1, GFXOV_MODE_Picture, nil, GFX_BLIT_Parent);
-		
+
 		var item =
 		{
 			BackgroundColor = {Std = RGB(50, 50, 50), OnHover = RGB(100, 0, 0)},
@@ -99,12 +100,16 @@ func MakeMenu(string what, int priority)
 				Right = "2.5em",
 				Symbol = GetTitleDef(obj)
 			},
+			title = 
+			{
+				Style = GUI_TextRight | GUI_TextTop,
+				Text = Format("<c %x>%s</c>", RGB(255, 80, 255), obj->GetName())
+			},
 			desc =
 			{
 				Left = "2.5em",
-				Symbol = dummy,
 				Style = GUI_TextBottom | GUI_TextRight,
-				Text = Format("%d Credits", obj->GetValue())
+				Text = Format("<c %x>%d$</c>", RGBa(255, 255, 0, 128), obj->GetValue()),
 			},
 			OnMouseIn = GuiAction_SetTag("OnHover"),
 			OnMouseOut = GuiAction_SetTag("Std"),
@@ -119,7 +124,7 @@ func MakeMenu(string what, int priority)
 }
 
 
-public func OnItemSelection(object item)
+public func OnItemSelection(proplist item)
 {
 	var plr = menu_object->GetOwner();
 	var ID = item;
@@ -141,11 +146,11 @@ public func OnItemSelection(object item)
 		if(PerkChangeDenied(plr))
 		{
 			CustomMessage("<c ff0000>$PerkNextRound$</c>", nil, plr);
-			Sound("Munch?", false, nil, plr);
+			Sound("Clonk::Action::Munch?", false, nil, plr);
 		}
 		else
 		{
-			menu_object->Sound("Breathing", false, 50);
+			menu_object->Sound("Clonk::Action::Breathing", false, 50);
 			
 			var flm = CreateObject(FloatingMessage, menu_object->GetX() - GetX(), menu_object->GetY() - GetY());
 			flm->SetMessage(Format("Perk: %s", ID->GetName()));
@@ -175,7 +180,7 @@ func BuyWeapon(plr, ID)
 		{
 			var returnval = Menu_ReloadWeapons->TryReload(menu_object, menu_object->FindContents(ID));
 			if(returnval > 0)
-				menu_object->Sound("Cash", false, nil, plr);
+				menu_object->Sound("UI::Cash", false, nil, plr);
 			else 
 				if(returnval == 0)
 					Sound("Nope", false, nil, plr);
@@ -183,7 +188,7 @@ func BuyWeapon(plr, ID)
 		}
 	
 	if(
-		((menu_object->ContentsCount() >= menu_object->MaxContentsCount()) && (!ID->~NeedsNoSlot()))
+		((menu_object->ContentsCount() >= menu_object.MaxContentsCount) && (!ID->~NeedsNoSlot()))
 		|| ID->~RejectPurchase(menu_object)
 		)
 	{
@@ -199,7 +204,7 @@ func BuyWeapon(plr, ID)
 	
 	DoWealth(plr, -ID->GetValue());
 	menu_object->CreateContents(ID);
-	menu_object->Sound("Cash");
+	menu_object->Sound("UI::Cash");
 	
 	var flm = CreateObject(FloatingMessage, menu_object->GetX() - GetX(), menu_object->GetY() - GetY());
 	flm->SetMessage(Format("%d", -ID->GetValue()));

@@ -8,7 +8,7 @@ public func GetCarrySpecial(clonk) { if(fAiming > 0) return "pos_hand2"; }
 public func GetCarryBone()	{	return	"main";	}
 public func GetCarryTransform()
 {
-	return Trans_Rotate(-90, 0, 1, 0);
+	return Trans_Mul(Trans_Rotate(-90, 0, 1, 0), Trans_Rotate(90, 1, 0, 0));
 }
 
 local animation_set;
@@ -24,7 +24,7 @@ local weapon_properties =
 	//spread_decrease = 30,
 	
 	bullet_id = NormalBullet,
-	damage = 2,
+	damage = 2500,
 	range = 120,
 	
 	bullet_distance = 10,
@@ -45,7 +45,7 @@ func Initialize()
 		AimMode        = AIM_Position, // The aiming animation is done by adjusting the animation position to fit the angle
 		AnimationAim   = "MusketAimArms",
 		AnimationLoad  = "MusketLoadArms",
-		LoadTime       = 120,
+		LoadTime       = 90,
 		AnimationShoot = nil,
 		ShootTime      = 20,
 		WalkSpeed      = nil,
@@ -80,6 +80,11 @@ func FireEffect(clonk, angle, off_x, off_y)
 {
 	clonk->CreateMuzzleFlash(off_x, off_y, angle, 40);
 	CreateCartridgeEffect(5, -Sin(angle,500)/80, -RandomX(6,12));
+}
+
+func FireScreenshake(clonk)
+{
+	ShakeViewport(20, 0, 0, 10);
 }
 
 func Definition(def) {

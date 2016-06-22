@@ -6,9 +6,14 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
+private func SetMeshTransformation(array additional)
+{
+	this.MeshTransformation = Trans_Mul(additional, Trans_Translate(-7000, 11000, 0), Trans_Rotate(90, 0, 0, 1));
+}
+
 public func Initialize()
 {
-	this.MeshTransformation = Trans_Rotate(RandomX(-5, 5), 0, 1, 0);
+	SetMeshTransformation(Trans_Rotate(RandomX(-5, 5), 0, 1, 0));
 	this.particles = 
 	{
 		R = PV_Random(100, 155), B = PV_Random(100, 155), G = 155,
@@ -29,7 +34,7 @@ func IsProjectileInteractionTarget(){return true;}
 
 func OnProjectileInteraction(source_x, source_y, angle, shooter, damage)
 {
-	this.MeshTransformation = Trans_Rotate(RandomX(-5, 5), 0, 1, 0);
+	SetMeshTransformation(Trans_Rotate(RandomX(-5, 5), 0, 1, 0));
 	var mx = GetX(), my = GetY();
 	var d = Distance(source_x, source_y, mx, my);
 	

@@ -39,7 +39,7 @@ func DoExplode()
 		DoDmg(damage - Min(objdist*2/3, damage*9/10), nil, o, nil, nil, nil, from_ID);
 	}
 
-	Sound("Blast3");
+	Sound("Fire::Blast3");
 	ExplosionEffect(dist);
 	RemoveObject();
 }
@@ -151,30 +151,38 @@ func FxSmokeTrailTimer(object pTarget, proplist effect)
 	effect.x = pTarget->GetX();
 	effect.y = pTarget->GetY();
 	
+	effect.fp ={
+	    	Size = PV_Linear(6,0),
+	    	Phase = PV_Random(0, 3, 10),
+			Alpha = PV_Linear(255,0),
+			BlitMode = GFX_BLIT_Additive,
+			//Attach = ATTACH_Front,
+	    };
+	
+	effect.sp = {
+	   	 	Size = PV_Linear(7, 0),
+	    	Phase = PV_Random(0, 15),
+	    	Alpha = PV_Linear(255, 0),
+	    	R = 100,
+	    	G = 100,
+	    	B = 100,
+	    	ForceX = PV_Random(-10, 10),
+	    	ForceY = PV_Random(-10, 10),
+	    	//BlitMode = GFX_BLIT_Additive,
+	    };
+
+	effect.x = GetX();
+	effect.y = GetY();
+	    
 }
 
 func FxSmokeTrailDraw(pTarget,proplist effect)
 {
-
-  var dist = Distance(0,0,pTarget->GetXDir(),pTarget->GetYDir());
-  var maxx = +Sin(GetR(),dist/10);
-  var maxy = -Cos(GetR(),dist/10);
-  var ptrdist = 50;
-
-  for(var i=0; i<dist; i+=ptrdist) {
-
-    var x = -maxx*i/dist;
-    var y = -maxy*i/dist;
-
-
-    var rand = RandomX(-30,30);
-    var xdir = +Sin(GetR()+rand,5);
-    var ydir = -Cos(GetR()+rand,5);
-
-    CreateParticle("FireDense",x,y,GetXDir()/2,GetYDir()/2, PV_Random(20, 30), Particles_Fire());
-    Smoke(0, 0, 5);
-  }
-  
+	DrawParticleLine("SmokeyMcSmokeFace", 0, 0, effect.x - GetX(), effect.y - GetY(), 1, 0, 0, 20, effect.sp);
+	DrawParticleLine("Fire", 0, 0, effect.x - GetX(), effect.y - GetY(), 1, 0, 0, 3, effect.fp);
+	
+	effect.x = GetX();
+	effect.y = GetY();
 }
 
 

@@ -1,3 +1,2 @@
-Name=RocketLauncher
-Description=Boom!
-UsageHelp=Zielen und Schiessen!
+Name=RPG
+Description=Einmalige Benutzung. Schiesst eine Rakete.
