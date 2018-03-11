@@ -32,7 +32,7 @@
 		Control=Grenade
 		
 		[Assignment]
-		Key=Mouse1Move
+		Key=Mouse0Move
 		Control=CaedesAimingCursor
 		Priority=30
 				
