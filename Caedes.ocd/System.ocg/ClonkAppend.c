@@ -2,8 +2,8 @@
 #appendto Clonk
 
 // Should be made nicer..
-func DoRoll() {}
-func DoKneel() {}
+func DoRoll(...) {}
+func DoKneel(...) {}
 
 func CreateMuzzleFlash(int x, int y, int angle, int size)
 {
@@ -69,7 +69,9 @@ func CatchBlow(level, by)
 	if(by)
 		SetLastDamagingWeapon(Symbol_DeathByObject);
 	BloodSplatter(level);
+#warning disable arg_count_mismatch
 	return _inherited(level, by, ...);
+#warning enable arg_count_mismatch
 }
 
 func FxOverallDamageStuffDamage(pTarget, iEffectNumber, iDmgEngy, iCause, iBy)
@@ -103,7 +105,7 @@ func FxOverallDamageStuffDamage(pTarget, iEffectNumber, iDmgEngy, iCause, iBy)
 				{
 					var dmg=iDmgEngy/2;
 					//crew->DoEnergy(dmg, crew, 1, iCause, iBy+1);
-					crew->DoDmg(-dmg, nil, crew, 1, nil, crew, Rule_Restart);
+					crew->DoDmg(-dmg, nil, crew, 1, nil, crew, Rule_Relaunch);
 					//PlayerMessage(iBy, "<c ff0000>$teamdamage$</c>");
 					iDmgEngy/=2;
 				}

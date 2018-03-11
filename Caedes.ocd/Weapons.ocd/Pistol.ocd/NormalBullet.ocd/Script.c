@@ -20,7 +20,7 @@ protected func Initialize()
 
 protected func Hit()
 {
-	Sound("Objects::Weapons::Musket::BulletHitGround?");
+	Sound("Objects::Weapons::Blunderbuss::BulletHitGround?");
 	CreateImpactEffect(Max(5, damage*2/3000));
 	RemoveObject();
 }
@@ -201,7 +201,7 @@ public func OnStrike(object obj)
 	if(obj->GetAlive())
 		Sound("Hits::ProjectileHitLiving?");
 	else
-		Sound("Objects::Weapons::Musket::BulletHitGround?");
+		Sound("Objects::Weapons::Blunderbuss::BulletHitGround?");
 }
 
 

@@ -3,7 +3,7 @@
 func TitleDef(){return Rifle_Title;}
 
 public func GetDescID() { return "SniperDesc"; }
-public func GetCarryMode(clonk) { if(fAiming >= 0) return CARRY_Musket; }
+public func GetCarryMode(clonk) { if(fAiming >= 0) return CARRY_Blunderbuss; }
 public func GetCarrySpecial(clonk) { if(fAiming > 0) return "pos_hand2"; }
 public func GetCarryBone()	{	return	"main";	}
 public func GetCarryTransform()
@@ -84,7 +84,7 @@ func Definition(def) {
 
 func ManipulateBullet(object bullet)
 { 
-	AddEffect("SniperBullet", bullet, 20, 1, 0, GetID());
+	AddEffect("SniperBullet", bullet, 20, 1, nil, GetID());
 }
 
 func FxSniperBulletStart(object pTarget, proplist effect, int temp, object by_obj)
@@ -132,6 +132,5 @@ func FxSniperBulletStop(pTarget,proplist effect)
 
 local Name = "$Name$";
 local Description = "$Description$";
-local UsageHelp = "$UsageHelp$";
 local Collectible = 1;
 local Rebuy = true;

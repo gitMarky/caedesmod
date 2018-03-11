@@ -12,9 +12,9 @@ func SwordDamage(int shield)
 public func IsFirstHandItem(){return true;}
 public func IsPrimaryWeapon(){return true;}
 
-/* caedes end */
+//static const Sword_Standard_StrikingLength = 15; // in frames
 
-static const Sword_Standard_StrikingLength = 15; // in frames
+/* caedes end */
 
 func Hit()
 {
@@ -212,7 +212,7 @@ func CheckStrike(iTime)
 			// don't hit objects twice
 			if(!GetEffect(effect_name, obj))
 			{
-				AddEffect(effect_name, obj, 1, Sword_Standard_StrikingLength, nil, 0);
+				AddEffect(effect_name, obj, 1, Sword_Standard_StrikingLength, nil, nil);
 				
 				if(GetEffect(sword_name, obj))
 				{
@@ -222,7 +222,7 @@ func CheckStrike(iTime)
 				else
 				{
 					//Log("first hit overall");
-					AddEffect(sword_name, obj, 1, 40, nil, 0);
+					AddEffect(sword_name, obj, 1, 40, nil, nil);
 				}
 
 				

@@ -3,7 +3,7 @@
 func TitleDef(){return SMG_Title;}
 
 public func GetDescID() { return "SMGDesc"; }
-public func GetCarryMode(clonk) { if(fAiming >= 0) return CARRY_Musket; }
+public func GetCarryMode(clonk) { if(fAiming >= 0) return CARRY_Blunderbuss; }
 public func GetCarrySpecial(clonk) { if(fAiming > 0) return "pos_hand2"; }
 public func GetCarryBone()	{	return	"main";	}
 public func GetCarryTransform()

@@ -4,7 +4,7 @@ Caedes
 Caedes is a mod for the free and open-source game [OpenClonk](http://openclonk.org/).
 It is a team-shooter mod that is based on quick, successive rounds where both teams try to fulfill a certain objective.
 
-* This mod requires at least OpenClonk 7.0.
+* This mod requires at least OpenClonk 8.0.
 * Caedes is currently not in a playable state.
 
 License

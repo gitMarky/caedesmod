@@ -1,4 +1,4 @@
-/*-- League System --*/
+ï»¿/*-- League System --*/
 
 static const Z4LEAGUE_KEY_NAME="CaedesLeagueScore001";
 static const Z4LEAGUE_AVERAGE_POINTS=30;
@@ -13,7 +13,7 @@ global func Z4GetLeagueRanks(iNum)
 {
  if(GameCall("Z4HasOwnLeagueRanks"))
   return GameCall("Z4GetSpecificLeagueRanks",iNum);
- var ar=["Clonk", "Fähnrich", "Leutnant", "Hauptmann", "Major", "Oberst", "Brigadegeneral", "Generalmajor", "Generalleutnant", "General", "Feldmarschall", "Ritter", "Held", "Volksheld", "Fürst", "König", "Kaiser", "Kampfbuggi", "Phantom", "Gaya", "Gil-Galad", "Smaug", "Sauron", "Legolas", "Godfather", "Schwarzer Peter", "Wipfmetz", "Badewannenkapitän", "Der mit dem Wipf tanzt", "Olliphant", "Hornblower", "Devastor", "Ventilator", "Cycle", "Wurstwasser", "Bayer", "Pfälzer", "Nordbär", "Esper", "Meister", "Zorb", "Goldgräber", "Fling", "Luftschiff", "Nullpointer", "Sven2", "Svalinz Palist Goold", "Durarug"];
+ var ar=["Clonk", "FÃ¤hnrich", "Leutnant", "Hauptmann", "Major", "Oberst", "Brigadegeneral", "Generalmajor", "Generalleutnant", "General", "Feldmarschall", "Ritter", "Held", "Volksheld", "FÃ¼rst", "KÃ¶nig", "Kaiser", "Kampfbuggi", "Phantom", "Gaya", "Gil-Galad", "Smaug", "Sauron", "Legolas", "Godfather", "Schwarzer Peter", "Wipfmetz", "BadewannenkapitÃ¤n", "Der mit dem Wipf tanzt", "Olliphant", "Hornblower", "Devastor", "Ventilator", "Cycle", "Wurstwasser", "Bayer", "PfÃ¤lzer", "NordbÃ¤r", "Esper", "Meister", "Zorb", "GoldgrÃ¤ber", "Fling", "Luftschiff", "Nullpointer", "Sven2", "Svalinz Palist Goold", "Durarug"];
  if(iNum) return GetLength(ar);
  return ar;
 }

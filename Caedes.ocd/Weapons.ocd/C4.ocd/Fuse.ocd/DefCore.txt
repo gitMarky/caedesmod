@@ -11,5 +11,4 @@ VertexY=3,-1,-1
 VertexFriction=20
 Value=1
 Mass=2
-Components=C4_Fuse=1
 

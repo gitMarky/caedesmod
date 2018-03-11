@@ -19,7 +19,6 @@ func Definition(def) {
 
 local Name = "$Name$";
 local Description = "$Description$";
-local UsageHelp = "$UsageHelp$";
 local Collectible = 1;
 local Rebuy = true;
 
@@ -247,7 +246,7 @@ func FinishReload()
 
 func FireSound()
 {
-	SoundAt("Objects::Weapons::Musket::GunShoot*");
+	SoundAt("Objects::Weapons::Blunderbuss::GunShoot*");
 }
 
 func TryFire(clonk, angle)
@@ -300,8 +299,8 @@ func Fire(clonk, angle)
 	AddEffect("Recharge", clonk, 1, 2, nil, Pistol, recharge_time);
 	clonk->~UpdateHUD();
 	
-	if(rounds == 0)
-		;//clonk->CancelAiming(this);
+	/*if(rounds == 0)
+		clonk->CancelAiming(this);*/
 	
 	CheckReload();
 }

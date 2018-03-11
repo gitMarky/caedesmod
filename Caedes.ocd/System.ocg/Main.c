@@ -45,7 +45,7 @@ global func InitCaedes()
 	//AddEffect("GlobalVisibilityCheck", 0, 1, 15, 0);
 	if(!ObjectCount(Find_ID(CallbackRule)))
 		CreateObject(CallbackRule);
-	AddEffect("SchedNewRound", 0, 1, 60);
+	AddEffect("SchedNewRound", nil, 1, 60);
 	
 	StopGameCounter(true); // create game counter, stopped
 	
@@ -138,7 +138,7 @@ global func FxGlobalVisibilityCheckTimer(t, effect, time)
 	var unmarked = [];
 	var all = Caedes_ViewPoints[:];
 	
-	for(o in all)
+	for(var o in all)
 	{
 		o.Visibility = (VIS_Owner | VIS_Allies | VIS_God);
 	}
