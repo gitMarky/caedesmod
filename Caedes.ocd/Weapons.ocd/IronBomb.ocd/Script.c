@@ -51,7 +51,7 @@ func DoExplode()
 		shrapnel->SetVelocity(i, RandomX(100,140));
 		shrapnel->SetRDir(-30+ Random(61));
 		shrapnel.from_ID = IronBomb;
-		CreateObject(BulletTrail)->Set(2,30,shrapnel);
+		CreateObject(BulletTrail)->Set(shrapnel, 2,30);
 		AddEffect("HitCheck2", shrapnel, 1,1, nil,nil, nil);
 	}
 	if(GBackLiquid())
