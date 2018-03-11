@@ -53,15 +53,17 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	fx.range = range;
 	fx.dmg = damage;
 	fx.shooter = shooter;
-	fx.particle_ray = 
-		{
-			Size = 6,
-			Alpha = PV_KeyFrames(0, 0, 255, 500, 255, 1000, 0),
-			BlitMode = GFX_BLIT_Additive,
-			Rotation = fx.a / 100,
-			G = 200,
-			B = 100,
-		};
+	fx.particle_ray = nil;
+	if (shooter && !shooter.silencer)
+		fx.particle_ray = 
+			{
+				Size = 6,
+				Alpha = PV_KeyFrames(0, 0, 255, 500, 255, 1000, 0),
+				BlitMode = GFX_BLIT_Additive,
+				Rotation = fx.a / 100,
+				G = 200,
+				B = 100,
+			};
 }
 
 func FxTravelStart(object target, proplist fx, int temporary)
@@ -128,7 +130,7 @@ func FxTravelTimer(object target, proplist fx, int time)
 	
 	
 	SetPosition(tx, ty);
-	if(time)
+	if(time && fx.particle_ray)
 	{
 		DrawParticleLine("RaySpark", 0, 0, fx.ox - GetX(), fx.oy - GetY(), 1, 0, 0, 5, fx.particle_ray);
 	}
