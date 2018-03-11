@@ -51,7 +51,7 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	var fx = AddEffect("Travel", this, 1, 1, this);
 	fx.a = angle;
 	fx.range = range;
-	fx.dmg = dmg;
+	fx.dmg = damage;
 	fx.shooter = shooter;
 	fx.particle_ray = 
 		{

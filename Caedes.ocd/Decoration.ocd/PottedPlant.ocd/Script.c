@@ -34,6 +34,9 @@ func IsProjectileInteractionTarget(){return true;}
 
 func OnProjectileInteraction(source_x, source_y, angle, shooter, damage)
 {
+	damage /= 1000;
+	if (Random(10) > damage) return;
+	
 	SetMeshTransformation(Trans_Rotate(RandomX(-5, 5), 0, 1, 0));
 	var mx = GetX(), my = GetY();
 	var d = Distance(source_x, source_y, mx, my);
