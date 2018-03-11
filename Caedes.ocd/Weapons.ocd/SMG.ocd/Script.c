@@ -2,6 +2,9 @@
 
 func TitleDef(){return SMG_Title;}
 
+local Name = "$Name$";
+local Description = "$Description$";
+
 public func GetDescID() { return "SMGDesc"; }
 public func GetCarryMode(clonk) { if(fAiming >= 0) return CARRY_Blunderbuss; }
 public func GetCarrySpecial(clonk) { if(fAiming > 0) return "pos_hand2"; }
