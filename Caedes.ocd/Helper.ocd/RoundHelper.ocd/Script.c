@@ -8,7 +8,7 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-static const CAEDES_ViewRange = 600;
+static const CAEDES_ViewRange = 300;
 
 static Caedes_Halftime_announced;
 static Caedes_LastRound_announced;
