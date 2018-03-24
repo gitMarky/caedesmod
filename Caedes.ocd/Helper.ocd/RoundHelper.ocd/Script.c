@@ -8,7 +8,7 @@
 local Name = "$Name$";
 local Description = "$Description$";
 
-static const CAEDES_ViewRange = 600;
+static const CAEDES_ViewRange = 300;
 
 static Caedes_Halftime_announced;
 static Caedes_LastRound_announced;
@@ -229,7 +229,7 @@ func NewRound()
 			Caedes_LastRound_announced = true;
 			AnnounceLastRound();
 		}
-		CustomMessage(Format("$NewRound$", t / 60, t % 60), nil, nil, 0, 0, 0, 0, 0, 0);
+		CustomMessage(Format("$NewRound$", t / 60, t % 60));
 	}
 	else CustomMessage("$NewRoundShort$");
 		

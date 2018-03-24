@@ -2,8 +2,8 @@
 #appendto Clonk
 
 // Should be made nicer..
-func DoRoll() {}
-func DoKneel() {}
+func DoRoll(...) {}
+func DoKneel(...) {}
 
 func CreateMuzzleFlash(int x, int y, int angle, int size)
 {
@@ -18,7 +18,15 @@ func CreateMuzzleFlash(int x, int y, int angle, int size)
 func Recruitment()
 {
 	this.ThrowSpeed *= 2;
-	this.JumpSpeed = 500;
+	this.JumpSpeed = 100;
+	this.JumpAcceleration = 40;
+	
+	for (var i = 0; i < GetVertexNum(); ++i)
+	{
+		SetVertex(i, VTX_Friction, 0, 2);
+		SetVertex(i, VTX_X, BoundBy(GetVertex(i, VTX_X), -2, 2), 2);
+		SetVertex(i, VTX_Y, Max(GetVertex(i, VTX_Y), -3), 2);
+	}
 	
 	if(this.ActMap == this.Prototype.ActMap)
 	{
@@ -69,7 +77,9 @@ func CatchBlow(level, by)
 	if(by)
 		SetLastDamagingWeapon(Symbol_DeathByObject);
 	BloodSplatter(level);
+#warning disable arg_count_mismatch
 	return _inherited(level, by, ...);
+#warning enable arg_count_mismatch
 }
 
 func FxOverallDamageStuffDamage(pTarget, iEffectNumber, iDmgEngy, iCause, iBy)
@@ -103,7 +113,7 @@ func FxOverallDamageStuffDamage(pTarget, iEffectNumber, iDmgEngy, iCause, iBy)
 				{
 					var dmg=iDmgEngy/2;
 					//crew->DoEnergy(dmg, crew, 1, iCause, iBy+1);
-					crew->DoDmg(-dmg, nil, crew, 1, nil, crew, Rule_Restart);
+					crew->DoDmg(-dmg, nil, crew, 1, nil, crew, Rule_Relaunch);
 					//PlayerMessage(iBy, "<c ff0000>$teamdamage$</c>");
 					iDmgEngy/=2;
 				}
@@ -436,3 +446,4 @@ func FxIntAimTimer(target, effect, time)
 		return -1;
 	}
 }
+

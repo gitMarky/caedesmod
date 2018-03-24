@@ -22,6 +22,43 @@ local ActMap = {
 	},
 };
 
+local SmokeTrailEffect = new Effect
+{
+	Construction = func ()
+	{
+		this.smoke = new Particles_Smoke() {
+			ForceY = 0,
+			Alpha = PV_Linear(50, 0)
+		}; 
+		this.flare = new Particles_Flash(20) {
+			Stretch = 3000,
+			Rotation = PV_Random(-180, 180),
+			Phase = PV_Step(1, 0, 5),
+			Attach = ATTACH_Front | ATTACH_MoveRelative,
+			G = 64, B = 64
+		};
+		this.shockwave = new this.flare {
+			Size = PV_Linear(80, 50), 
+			Stretch = 0,
+			Alpha = PV_Linear(100, 0)
+		};
+		this.x = this.Target->GetX();
+		this.y = this.Target->GetY();
+	},
+	Timer = func (int time)
+	{
+		this.Target->DrawParticleLine2("SmokeDirty", this.x - this.Target->GetX(), this.y - this.Target->GetY(), 0, 0, 1, 1, 1, PV_Random(10, 20), this.smoke);
+		this.Target->CreateParticle("FireSharp", 0, 0, 0, 0, PV_Random(10, 20), this.flare, 4);
+		this.Target->CreateParticle("Shockwave", 0, 0, 0, 0, 5, this.shockwave, 1);
+		this.x = this.Target->GetX();
+		this.y = this.Target->GetY();
+		
+		if (time > 2 * this.Target.remaining_time)
+			this.Target->RemoveObject();
+		return FX_OK;
+	}
+};
+
 public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapon, range)
 {
 	from_ID = weapon;
@@ -43,11 +80,11 @@ public func Fire(object shooter, int angle, int dev, int dist, int dmg, id weapo
 	SetComDir(COMD_None);
 	SetSpeed(Sin(angle, range * 10, 100), -Cos(angle, range * 10, 100), 100);
 
-	var e = AddEffect("SmokeTrail", this, 1, 1, this);
-	e.x = GetX();
-	e.y = GetY();
+	CreateEffect(SmokeTrailEffect, 1, 1);
 	
 	AddEffect("HitCheck2", this, 1,1, nil,nil, shooter);
+	
+	SetLightRange(10, 50);
 }
 
 func Remove(){RemoveObject();}
@@ -103,25 +140,6 @@ func ReaddHitCheck()
 {
 	if(GetEffect("HitCheck2", this)) return;
 	AddEffect("HitCheck2", this, 1,1, nil,nil, user);	
-}
-
-func FxSmokeTrailStart(target, effect, temp)
-{
-	if (temp) return;
-	effect.particles = 
-	{
-		Prototype = Particles_Smoke(),
-		ForceY = 0,
-		Alpha = PV_KeyFrames(0, 0, 128, 1000, 0)
-	};
-}
-
-func FxSmokeTrailTimer(target, effect, time)
-{
-	DrawParticleLine2("SmokeDirty", effect.x - GetX(), effect.y - GetY(), 0, 0, 1, 1, 1, PV_Random(10, 20), effect.particles);
-	CreateParticle("SphereSpark", 0, 0, 0, 0, 10, {Prototype = Particles_Flash(), Size = 6}, 1);
-	effect.x = GetX();
-	effect.y = GetY();
 }
 
 func Hit(int x, int y)

@@ -3,7 +3,7 @@
 func TitleDef(){return Shotgun_Title;}
 
 public func GetDescID() { return "ShotgunDesc"; }
-public func GetCarryMode(clonk) { if(fAiming >= 0) return CARRY_Musket; }
+public func GetCarryMode(clonk) { if(fAiming >= 0) return CARRY_Blunderbuss; }
 public func GetCarrySpecial(clonk) { if(fAiming > 0) return "pos_hand2"; }
 public func GetCarryBone()	{	return	"main";	}
 public func GetCarryTransform()
@@ -93,6 +93,5 @@ func Definition(def) {
 
 local Name = "$Name$";
 local Description = "$Description$";
-local UsageHelp = "$UsageHelp$";
 local Collectible = 1;
 local Rebuy = true;

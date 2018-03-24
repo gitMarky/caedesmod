@@ -324,22 +324,12 @@ func Hit(int oldx, int oldy)
 {
 	if (IsJumping())
 	{
-		if (GetContact(-1, CNAT_Right))
+		if (GetContact(-1, CNAT_Top) && (oldy < 0))
 		{
-			SetXDir(-10);
-			SetYDir(oldy, 100);
-			AddEffect("CheckComDir", this, 1, 1, this);
-		}
-		else if (GetContact(-1, CNAT_Left))
-		{
-			SetXDir(10);
-			SetYDir(oldy, 100);
-			AddEffect("CheckComDir", this, 1, 1, this);
-		}
-		else if (GetContact(-1, CNAT_Top) && (oldy < 0))
-		{
+			if (this.jumpfx)
+				RemoveEffect(nil, nil, this.jumpfx);
 			SetXDir(oldx, 100);
-			SetYDir(+5);
+			SetYDir(Max(GetYDir(), 5));
 		}
 	}
 	
@@ -366,21 +356,41 @@ func FxCheckComDirTimer(target, fx, time)
 	}
 }
 
-
-
-func StartJump()
+local VariableJumpHeightEffect = new Effect
 {
-	// Reset jump acceleration
-	var fx = GetEffect("JumpingSpeedAdjustment", this);
-	if (fx) RemoveEffect(nil, this, fx);
-	this.ActMap.Jump.Accel = this.ActMap.Jump.Prototype.Accel;
-	this.ActMap.Jump.Decel = this.ActMap.Jump.Prototype.Decel;
-	AddEffect("JumpingSpeedAdjustment", this, 1, 2, this);
-	return inherited(...);
-}
+  Timer = func(int time)
+  {
+    if (time > 10) return FX_Execute_Kill;
+    if (!Target) return FX_Execute_Kill;
+    if (Target->GetProcedure() != DFA_FLIGHT) return FX_Execute_Kill;
+    var ydir = Target->GetYDir(100);
+    if (ydir > 0) return FX_Execute_Kill;
+    var plr = Target->GetController();   
+    if (GetPlayerType(plr) == C4PT_User)
+    {
+      if (GetPlayerControlState(plr, CON_Up))
+      {
+        Target->SetYDir(ydir - this.Target.JumpAcceleration, 100);
+      }
+    }
+    return FX_OK;
+  },
 
-func FxJumpingSpeedAdjustmentTimer()
+  Destruction = func()
+  {
+    if (Target) Target.jumpfx = nil;
+  }
+};
+
+public func ControlJumpExecute(int ydir, ...)
 {
-	if (GetYDir() < 0) return FX_OK;
-	return FX_Execute_Kill;
+  if (inherited(ydir, ...))
+  {
+    // Add a timer to adjust vertical speed if not holding the jump key
+    if (this.jumpfx) RemoveEffect(nil, nil, this.jumpfx);
+    if (this.JumpAcceleration != nil)
+    	this.jumpfx = CreateEffect(VariableJumpHeightEffect, 1, 1);
+    return true;
+  }
+  return false;
 }

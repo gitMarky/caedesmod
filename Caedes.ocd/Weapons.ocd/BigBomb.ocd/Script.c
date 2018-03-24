@@ -117,7 +117,7 @@ func Exec()
 		else
 		{
 			this.bar = Contained()->CreateProgressBar(GUI_RingProgressBar, BigBomb_MaxCounter_Plant - counter*30, 0, 35, Contained()->GetOwner(), nil, VIS_Owner | VIS_Allies);
-			var e = AddEffect("UpdateBar", this, 1, 5, this);
+			AddEffect("UpdateBar", this, 1, 5, this);
 		}
 		
 		if(counter*30 >= BigBomb_MaxCounter_Plant)
@@ -181,15 +181,15 @@ func FxBlowUpTimerStart(object target, proplist effect, temp)
 		var plr = GetPlayerByIndex(i);
 		var ok = 0;
 		if (GetPlayerTeam(plr) == this.team) ok = 1;
-		var bar = CreateProgressBar(GUI_HUDProgressBar, time_to_blow_up, 0, nil, plr, nil, VIS_Owner, {color = colors[ok], text = text[ok]});
-		PushBack(effect.bars, bar);
+		var hud_bar = CreateProgressBar(GUI_HUDProgressBar, time_to_blow_up, 0, nil, plr, nil, VIS_Owner, {color = colors[ok], text = text[ok]});
+		PushBack(effect.bars, hud_bar);
 	}
 }
 
 func FxBlowUpTimerTimer(target, effect, time)
 {
-	for (var bar in effect.bars)
-		bar->SetValue(time);
+	for (var hud_bar in effect.bars)
+		hud_bar->SetValue(time);
 		
 	if(time >= time_to_blow_up)
 	{
@@ -201,8 +201,8 @@ func FxBlowUpTimerTimer(target, effect, time)
 func FxBlowUpTimerStop(object target, proplist effect, wut, temp)
 {
 	if (temp) return;
-	for (var bar in effect.bars)
-		bar->Close();
+	for (var hud_bar in effect.bars)
+		hud_bar->Close();
 }
 
 func Boom()

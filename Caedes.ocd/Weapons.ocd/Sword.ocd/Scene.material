@@ -1,4 +1,4 @@
-material Sword2
+material Sword2_
 {
 	receive_shadows on
 	technique
@@ -19,7 +19,7 @@ material Sword2
 	}
 }
 
-material Swoosh
+material Swoosh_
 {
 	receive_shadows on
 	technique

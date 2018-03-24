@@ -11,5 +11,4 @@ VertexY=1,-1,-1
 VertexFriction=20
 Value=1
 Mass=10
-Components=RoundHelper=1
 ClosedContainer=1

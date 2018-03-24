@@ -102,7 +102,7 @@ func FxRocketHitCheckTimer(target, effect)
 	var oldx = effect.x;
 	var oldy = effect.y;
 
-	for (obj in FindObjects(	Find_Distance(15),
+	for (var obj in FindObjects(Find_Distance(15),
 								Find_NoContainer(),
 								Find_Layer(target->GetObjectLayer()),
 								Find_Or(Find_OCF(OCF_Alive), Find_Func("IsProjectileTarget", target)),

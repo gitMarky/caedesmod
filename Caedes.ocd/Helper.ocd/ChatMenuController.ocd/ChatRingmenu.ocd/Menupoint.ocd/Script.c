@@ -21,7 +21,7 @@ static const MI_CHAT_AMOUNT100_LAYER = 10;		// 1
 static const MI_CHAT_AMOUNT10_LAYER = 11;		// 9
 static const MI_CHAT_AMOUNT1_LAYER = 12;			// 2
 
-local angle, size;
+local angle;
 
 protected func Construction()
 {

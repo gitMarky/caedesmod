@@ -207,7 +207,7 @@ public func UpdateCursor(int dx, int dy)
 					var dist = Normalize(angle - (segment*i + segment/2),-180);
 					dist = BoundBy(dist*240/segment,-180,180);
 					dist = (dist**3)/(180**2);
-					var siz = (Cos(dist,1000)+1000)/2; // 0..1000
+					//var siz = (Cos(dist,1000)+1000)/2; // 0..1000
 					//if(outside) siz = Max(0,siz-Abs(distance - GUI_ChatRingmenu_Radius)*10);
 					//menu_icons[i]->SetSize((siz+2000)/Max(item_count,5)/2000); //see Show()
 					if(i == item)

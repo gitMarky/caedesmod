@@ -30,11 +30,11 @@ global func GameOver()
  return _inherited(...);
 }
 
-global func EliminatePlayer(par1,par2,par3,par4,par5)
+global func EliminatePlayer(par1, ...)
 {
  if(!fAchievementsActivated)cdsInitAchievements();
  cdsAddPlayerAchievementsToEvaluation(par1);
- return _inherited(par1,par2,par3,par4,par5);
+ return _inherited(par1, ...);
 }
 
 global func cdsAddAchievementsToEvaluation()
@@ -64,14 +64,14 @@ global func cdsAddAchievement(id ID, int iPlr)
  if(!(GetType(aPlayerAchievements[iPlr]) == C4V_Array))aPlayerAchievements[iPlr]=[];
  else
  {
-  if(GetIndexOf(ID,aPlayerAchievements[iPlr]) != -1) return;
+  if(GetIndexOf(aPlayerAchievements[iPlr], ID) != -1) return;
  }
  var cursor=GetCursor(iPlr);
- PushBack(ID, aPlayerAchievements[iPlr]);
+ PushBack(aPlayerAchievements[iPlr], ID);
  CustomMessage(Format("@<c ff0000>%s</c>|%s", ID->GetName(), ID.Description), nil, iPlr, -40, 50, 0xffffff, nil, ID, MSG_Right | MSG_Top, 180);
- GetCursor(iPlr)->Message(Format("@<c ff0000><i>%s</i></c>|{{%i}}",ID->GetName()),ID);
+ GetCursor(iPlr)->Message(Format("@<c ff0000><i>%s</i></c>|{{%i}}",ID->GetName(),ID));
  //Schedule(Format("cdsClearAchievementMessage(%d,%i)",iPlr,ID),35*8);
- AddEffect("ClearAchievementMessage",0,1,35*8,0,0,iPlr,ID);
+ AddEffect("ClearAchievementMessage",nil,1,35*8, nil, nil ,iPlr,ID);
  
  Log("$GotAchievement$",GetTaggedPlayerName(iPlr), ID->GetName());
  
@@ -93,7 +93,7 @@ global func FxClearAchievementMessageTimer(pTarget,effect,iEffectTime)
 
 global func cdsClearAchievementMessage(int iPlr, ID)
 {
- CustomMessage("", 0, iPlr, 0, 0, 0, nil, ID, MSG_Right | MSG_Top);
+ CustomMessage("", nil, iPlr, 0, 0, 0, nil, ID, MSG_Right | MSG_Top);
  Message("",GetCursor(iPlr));
 }
 
@@ -103,10 +103,10 @@ global func cdsGetAchievement(id ID, int iPlr)
  if(!(GetType(aPlayerAchievements[iPlr]) == C4V_Array))aPlayerAchievements[iPlr]=[];
  else
  {
-  if(GetIndexOf(ID,aPlayerAchievements[iPlr]) != -1) return;
+  if(GetIndexOf(aPlayerAchievements[iPlr], ID) != -1) return;
  }
  
- return GetIndexOf(ID,aPlayerAchievements[iPlr]) != -1;
+ return GetIndexOf(aPlayerAchievements[iPlr], ID) != -1;
 }
 
 global func cdsAchievementJedi(int iPlr)

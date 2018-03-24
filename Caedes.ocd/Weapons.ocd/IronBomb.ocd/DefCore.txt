@@ -12,5 +12,4 @@ VertexY=-2,2,2
 VertexFriction=20,20,20
 Value=30
 Mass=10
-Components=IronBomb=1;
 Rotate=1

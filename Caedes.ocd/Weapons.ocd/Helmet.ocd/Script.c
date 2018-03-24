@@ -28,7 +28,7 @@ func Entrance(obj)
 func FxWearsHelmetStart(target, effect, temp)
 {
 	if(temp) return;
-	effect.attach = target->AttachMesh(Helmet, "skeleton_head", "main");
+	effect.attach = target->AttachMesh(Helmet, "skeleton_head", "main", Trans_Rotate(90, 0, 0, 1));
 }
 
 func FxWearsHelmetDamage(target, effect, dmg, cause)

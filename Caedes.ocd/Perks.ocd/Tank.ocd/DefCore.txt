@@ -11,6 +11,5 @@ VertexY=1,-1,-1
 VertexFriction=20
 Value=0
 Mass=10
-Components=Perk_Tank=1
 Picture=0, 0, 64, 64
 

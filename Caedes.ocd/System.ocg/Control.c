@@ -93,12 +93,17 @@ global func Control2Player(int plr, int ctrl, int x, int y, int strength, bool r
 		if (cursor && !GetEffect("DoubleJumpCooldown", cursor) && cursor->IsJumping() && (cursor->GetYDir() <= 0))
 		{
 			var jumpspeed = cursor.JumpSpeed;
-			cursor.JumpSpeed *= 2;
+			var jumpaccel = cursor.JumpAcceleration;
+			var xdir = cursor->GetXDir(100);
+			cursor.JumpSpeed = 800;
+			cursor.JumpAcceleration = nil;
 			cursor->SetAction("Climb", nil, nil, true);
 			if (cursor->GetDir() == DIR_Right) cursor->SetDir(DIR_Left);
 			else cursor->SetDir(DIR_Right);
 			cursor->ControlJump();
 			cursor.JumpSpeed = jumpspeed;
+			cursor.JumpAcceleration = jumpaccel;
+			cursor->SetXDir(xdir, 100);
 			cursor->AddEffect("DoubleJumpCooldown", cursor, 1, 30);
 			return true;
 		}

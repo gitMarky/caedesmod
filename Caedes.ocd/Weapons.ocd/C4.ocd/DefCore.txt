@@ -11,5 +11,4 @@ VertexY=2,-1,-2
 VertexFriction=60, 60, 60
 Value=20
 Mass=10
-Components=C4=1
 Picture=24,0,64,64
